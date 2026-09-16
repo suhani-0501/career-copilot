@@ -9,10 +9,10 @@
    GEMINI API SETTINGS
 ========================================= */
 
-const API_KEY = "AQ.Ab8RN6IB-VcdMwkB58FllSlaBSF_yHFPZCCM0E2dHypyGb91vg";
+const API_KEY = "AQ.Ab8RN6J4YUjjtykMmp7bm4sK5AXN3KD2xA8mG2Yn_1BELW3QfQ";
 
 const API_URL =
-    `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=${API_KEY}`;
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent";
 
 
 const ALDEN_PROMPT = `
@@ -151,12 +151,6 @@ async function gemini_ai(user_input) {
 
        Do NOT use the key you previously pasted.
     */
-
-    const API_KEY = "PASTE_YOUR_NEW_GEMINI_API_KEY_HERE";
-
-
-    const API_URL =
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 
     /* =====================================
@@ -623,24 +617,21 @@ async function getGeminiResponse(userMessage) {
             method: "POST",
 
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "x-goog-api-key": API_KEY
             },
 
             body: JSON.stringify({
 
-                systemInstruction: {
-                    parts: [
-                        {
-                            text: ALDEN_PROMPT
-                        }
-                    ]
-                },
-
                 contents: [
                     {
+                        role: "user",
                         parts: [
                             {
-                                text: userMessage
+                                text:
+                                    ALDEN_PROMPT +
+                                    "\n\nUSER QUESTION:\n" +
+                                    userMessage
                             }
                         ]
                     }
@@ -651,29 +642,27 @@ async function getGeminiResponse(userMessage) {
         });
 
         console.log("HTTP Status:", response.status);
-        console.log("HTTP OK:", response.ok);
 
         const data = await response.json();
 
-        console.log("Gemini FULL RESPONSE:", data);
+        console.log("Gemini response:", data);
 
         if (!response.ok) {
 
-            console.error(
-                "Gemini API returned an error:",
-                data
-            );
+            console.error("Gemini API Error:", data);
 
-            return "Gemini API Error: " +
-                (data.error?.message || "Unknown error");
+            return (
+                "Gemini API Error: " +
+                (data.error?.message || "Unknown error")
+            );
         }
 
         if (
             data.candidates &&
-            data.candidates.length > 0 &&
+            data.candidates[0] &&
             data.candidates[0].content &&
             data.candidates[0].content.parts &&
-            data.candidates[0].content.parts.length > 0
+            data.candidates[0].content.parts[0]
         ) {
 
             return data.candidates[0]
@@ -682,19 +671,11 @@ async function getGeminiResponse(userMessage) {
                 .text;
         }
 
-        console.error(
-            "Unexpected Gemini response:",
-            data
-        );
-
         return "Gemini returned an unexpected response.";
 
     } catch (error) {
 
-        console.error(
-            "FETCH ERROR:",
-            error
-        );
+        console.error("FETCH ERROR:", error);
 
         return "Connection error: " + error.message;
     }
