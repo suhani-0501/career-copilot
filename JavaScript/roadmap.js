@@ -1,5 +1,116 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    const roadmapCareerIcons = {
+    "web-development": "globe",
+    "software-development": "laptop-code",
+    "data-science": "chart-column",
+    "artificial-intelligence": "robot",
+    "cybersecurity": "shield-halved",
+    "cloud-computing": "cloud",
+    "devops-engineering": "gears",
+    "mobile-app-development": "mobile-screen-button",
+    "ui-ux-design": "palette",
+    "database-administration": "database",
+    "network-engineering": "network-wired",
+    "game-development": "gamepad",
+    "blockchain-development": "link",
+    "data-analytics": "chart-line",
+    "technical-writing": "file-lines",
+
+    "doctor": "user-doctor",
+    "dentistry": "tooth",
+    "pharmacy": "pills",
+    "nursing": "user-nurse",
+    "physiotherapy": "person-walking",
+    "medical-laboratory": "flask",
+    "radiology-technician": "x-ray",
+    "occupational-therapy": "brain",
+    "optometry": "eye",
+    "nutrition-dietetics": "apple-whole",
+    "public-health": "hospital",
+    "medical-coding": "file-medical",
+    "healthcare-management": "hospital-user",
+
+    "business-management": "briefcase",
+    "marketing": "bullhorn",
+    "finance": "money-bill-trend-up",
+    "accounting": "file-invoice-dollar",
+    "human-resources": "users",
+    "business-analytics": "chart-pie",
+    "entrepreneurship": "rocket",
+    "investment-banking": "building-columns",
+    "consulting": "puzzle-piece",
+    "sales": "handshake",
+    "supply-chain": "truck",
+    "product-management": "box",
+    "digital-marketing": "mobile-screen-button",
+    "project-management": "clipboard-list",
+    "economics": "chart-line",
+
+    "graphic-design": "palette",
+    "animation": "film",
+    "film-making": "video",
+    "photography": "camera",
+    "content-creation": "microphone",
+    "fashion-design": "shirt",
+    "interior-design": "house",
+    "ux-research": "magnifying-glass",
+    "motion-graphics": "wand-magic-sparkles",
+    "copywriting": "pen-nib",
+    "video-editing": "scissors",
+    "architecture": "building",
+    "illustration": "paintbrush",
+
+    "school-teacher": "chalkboard-user",
+    "college-professor": "graduation-cap",
+    "online-teacher": "laptop",
+    "special-education": "heart",
+    "educational-psychology": "brain",
+    "instructional-design": "book-open",
+    "curriculum-design": "book",
+    "education-administration": "school",
+    "academic-counselling": "compass",
+    "corporate-training": "person-chalkboard",
+    "edtech-specialist": "lightbulb",
+    "language-teaching": "language",
+    "school-counselor": "comments",
+    "adult-education": "book",
+
+    "physics": "atom",
+    "chemistry": "flask",
+    "biology": "dna",
+    "biotechnology": "dna",
+    "microbiology": "bacterium",
+    "environmental-science": "leaf",
+    "astronomy": "satellite",
+    "geology": "mountain",
+    "marine-science": "water",
+    "food-science": "apple-whole",
+    "forensic-science": "microscope",
+    "mathematics": "calculator",
+    "statistics": "chart-simple",
+    "zoology": "paw",
+    "botany": "seedling",
+    "agricultural-science": "wheat-awn",
+
+    "law": "scale-balanced",
+    "civil-services": "landmark",
+    "journalism": "newspaper",
+    "social-work": "people-group",
+    "hospitality": "hotel",
+    "aviation": "plane",
+    "event-management": "calendar-days",
+    "travel-tourism": "globe",
+    "sports-management": "trophy",
+    "real-estate": "building",
+    "public-relations": "bullhorn",
+    "library-science": "book",
+    "insurance": "shield-halved",
+    "actuarial-science": "calculator",
+    "logistics": "boxes-stacked",
+    "fitness-training": "dumbbell"
+};
+
     /* =====================================================
        CHECK REQUIRED DATA
     ===================================================== */
@@ -723,8 +834,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (careerIcon) {
 
-            careerIcon.textContent =
-                career.icon;
+            const iconName =
+                roadmapCareerIcons[career.id] ||
+                "briefcase";
+
+            careerIcon.innerHTML = `
+                <i class="fa-solid fa-${iconName}"></i>
+            `;
         }
 
 
