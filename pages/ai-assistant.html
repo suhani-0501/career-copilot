@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Assistant | Career Copilot</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/responsive.css">
+    <link rel="stylesheet" href="../CSS/ai-assistant.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <a href="../index.html" class="logo">
+                <img
+                    src="../assests/logo-image.png"
+                    alt="Career Copilot">
+            </a>
+
+            <nav class="nav-links">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+                <a href="explore.html">
+                    Explore
+                </a>
+
+                <a href="compare.html">
+                    Compare
+                </a>
+
+                <a href="roadmaps.html">
+                    Roadmaps
+                </a>
+
+                <a href="ai-assistant.html" class="active">
+                    AI Assistant
+                </a>
+
+            </nav>
+
+            <div class="nav-actions">
+
+                <a href="login.html" class="btn btn-outline">
+                    Login
+                </a>
+
+                <a href="register.html" class="btn btn-primary">
+                    Get Started
+                </a>
+
+            </div>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open menu">
+
+                ☰
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="ai-page">
+
+        <div
+            class="ai-container"
+            id="aiContainer">
+
+
+            <section
+                class="ai-welcome"
+                id="aiWelcome">
+
+                <div class="ai-welcome-image">
+
+                    <img
+                        src="../assests/ai-bot.png"
+                        alt="Alden AI Assistant">
+
+                </div>
+
+                <h1>
+                    How may I help you today?
+                </h1>
+
+                <p>
+                    I'm Alden, your Career Copilot AI assistant.
+                    Ask me anything about careers, skills,
+                    resumes, learning paths, or your next step.
+                </p>
+
+            </section>
+
+
+            <header
+                class="chat-header"
+                id="chatHeader">
+
+                <div class="chat-profile">
+
+                    <div class="chat-profile-image">
+
+                        <img
+                            src="../assests/ai-bot.png"
+                            alt="Alden">
+
+                    </div>
+
+                    <div class="chat-profile-info">
+
+                        <h2>
+                            Alden
+                        </h2>
+
+                        <span>
+                            Career Copilot AI Assistant
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <section
+                class="chat-area"
+                id="chatArea"
+                aria-live="polite">
+            </section>
+
+
+            <section
+                class="suggested-questions"
+                id="suggestedQuestions">
+
+                <p class="suggested-title">
+                    You can ask me
+                </p>
+
+                <div class="question-list">
+
+                    <button
+                        type="button"
+                        class="question-button"
+                        data-question="Which career is best for me?">
+
+                        Which career is best for me?
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="question-button"
+                        data-question="What skills should I learn for a tech career?">
+
+                        What skills should I learn for a tech career?
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="question-button"
+                        data-question="Can you help me improve my resume?">
+
+                        Can you help me improve my resume?
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="question-button"
+                        data-question="How do I become a Software Developer?">
+
+                        How do I become a Software Developer?
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="question-button"
+                        data-question="I am confused about my career. What should I do?">
+
+                        I am confused about my career.
+                        What should I do?
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <section class="chat-input-area">
+
+                <div class="chat-input-wrapper">
+
+                    <textarea
+                        id="chatInput"
+                        rows="1"
+                        placeholder="Ask Alden anything about your career..."
+                        aria-label="Message Alden"></textarea>
+
+                    <button
+                        type="button"
+                        class="send-button"
+                        id="sendButton"
+                        aria-label="Send message">
+
+                        ➤
+
+                    </button>
+
+                </div>
+
+                <p class="input-note">
+                    Alden can help with careers, skills,
+                    resumes, roadmaps and learning guidance.
+                </p>
+
+            </section>
+
+
+        </div>
+
+    </main>
+
+
+    <script src="../JavaScript/main.js"></script>
+    <script src="../JavaScript/ai.js"></script>
+    <script src="../JavaScript/auth.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | Career Copilot</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/responsive.css">
+    <link rel="stylesheet" href="../CSS/register.css">
+</head>
+
+<body>
+
+
+    <!-- REGISTER PAGE -->
+
+    <main class="register-page">
+
+        <div class="register-background">
+
+
+            <!-- REGISTER CARD -->
+
+            <div class="register-card">
+
+                <div class="register-content">
+
+                    <h1>
+                        Create your account
+                    </h1>
+
+                    <p class="register-subtitle">
+                        Start building your career journey with Career Copilot.
+                    </p>
+
+
+                    <form id="registerForm">
+
+
+                        <!-- FULL NAME -->
+
+                        <div class="form-group">
+
+                            <label for="fullName">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="fullName"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div class="form-group">
+
+                            <label for="registerEmail">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="registerEmail"
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- PASSWORD -->
+
+                        <div class="form-group">
+
+                            <label for="registerPassword">
+                                Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="registerPassword"
+                                placeholder="Create a password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- CONFIRM PASSWORD -->
+
+                        <div class="form-group">
+
+                            <label for="confirmPassword">
+                                Confirm Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                placeholder="Confirm your password"
+                                autocomplete="new-password"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- ERROR / SUCCESS MESSAGE -->
+
+                        <p
+                            class="register-message"
+                            id="registerMessage"
+                        ></p>
+
+
+                        <!-- REGISTER BUTTON -->
+
+                        <button
+                            type="submit"
+                            class="register-button"
+                        >
+                            Register
+                        </button>
+
+                    </form>
+
+
+                    <!-- LOGIN LINK -->
+
+                    <p class="login-text">
+
+                        Already have an account?
+
+                        <a href="login.html">
+                            Login
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script src="../JavaScript/main.js"></script>
+    <script src="../JavaScript/register.js"></script>
+
+</body>
+
+</html>

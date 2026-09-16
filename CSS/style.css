@@ -1,0 +1,1061 @@
+/* =========================================
+   CAREER COPIOLIT
+   GLOBAL STYLES
+   Professional Edition
+========================================= */
+
+:root {
+    --maroon: #800020;
+    --dark-maroon: #5c0018;
+
+    --black: #151515;
+    --white: #ffffff;
+
+    --rose: #f3d7dd;
+    --light-bg: #fcf8f9;
+
+    --gray: #666666;
+    --dark-gray: #444444;
+    --light-gray: #eeeeee;
+    --border: #e7e7e7;
+
+    --container: 1200px;
+
+    --radius-sm: 7px;
+    --radius-md: 12px;
+    --radius-lg: 18px;
+
+    --shadow:
+        0 8px 28px rgba(0, 0, 0, 0.06);
+
+    --shadow-hover:
+        0 14px 35px rgba(0, 0, 0, 0.09);
+
+    --transition: 0.25s ease;
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: var(--black);
+    background: var(--white);
+
+    line-height: 1.6;
+    font-size: 15px;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    font: inherit;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container {
+    width: min(90%, var(--container));
+    margin: auto;
+}
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border-bottom:
+        1px solid var(--light-gray);
+
+    backdrop-filter: blur(12px);
+}
+
+.nav-container {
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+}
+
+.logo img {
+    width: 155px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+}
+
+.nav-links a {
+    position: relative;
+
+    color: #444;
+
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    transition:
+        color var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--maroon);
+}
+
+.nav-links a.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: -8px;
+
+    height: 2px;
+
+    background: var(--maroon);
+    border-radius: 10px;
+}
+
+.nav-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.menu-toggle {
+    display: none;
+
+    border: none;
+    background: none;
+
+    cursor: pointer;
+
+    color: var(--black);
+    font-size: 1.4rem;
+}
+
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    padding: 9px 17px;
+
+    border-radius: var(--radius-sm);
+
+    font-size: 0.88rem;
+    font-weight: 600;
+
+    border: 1px solid transparent;
+
+    cursor: pointer;
+
+    transition:
+        transform var(--transition),
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: var(--maroon);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background: var(--dark-maroon);
+}
+
+.btn-outline {
+    border-color: var(--maroon);
+
+    color: var(--maroon);
+
+    background: var(--white);
+}
+
+.btn-outline:hover {
+    background: var(--maroon);
+    color: var(--white);
+}
+
+.btn-light {
+    background: var(--white);
+    color: var(--maroon);
+}
+
+.btn-large {
+    padding: 12px 21px;
+    font-size: 0.92rem;
+}
+
+
+/* =========================================
+   SECTIONS
+========================================= */
+
+.section {
+    padding: 72px 0;
+}
+
+.section-heading {
+    max-width: 650px;
+    margin-bottom: 38px;
+}
+
+.section-heading h2 {
+    font-size: clamp(1.8rem, 3.2vw, 2.45rem);
+
+    line-height: 1.2;
+
+    letter-spacing: -0.5px;
+
+    margin: 8px 0 12px;
+}
+
+.section-heading p {
+    color: var(--gray);
+
+    font-size: 0.95rem;
+
+    line-height: 1.7;
+}
+
+.section-label {
+    color: var(--maroon);
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.4px;
+}
+
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+    background: var(--light-bg);
+
+    min-height:
+        calc(100vh - 70px);
+
+    display: flex;
+    align-items: center;
+}
+
+.hero-container {
+    display: grid;
+
+    grid-template-columns:
+        1.05fr 0.95fr;
+
+    align-items: center;
+
+    gap: 45px;
+
+    padding: 55px 0;
+}
+
+.hero-badge {
+    display: inline-block;
+
+    background: var(--rose);
+    color: var(--maroon);
+
+    padding: 6px 12px;
+
+    border-radius: 50px;
+
+    font-size: 0.76rem;
+
+    font-weight: 600;
+
+    margin-bottom: 17px;
+}
+
+.hero h1 {
+    font-size:
+        clamp(2.35rem, 4.5vw, 3.65rem);
+
+    line-height: 1.08;
+
+    letter-spacing: -1.5px;
+
+    max-width: 650px;
+}
+
+.hero h1 span {
+    color: var(--maroon);
+}
+
+.hero h2 {
+    font-size:
+        clamp(1.2rem, 1.8vw, 1.55rem);
+
+    color: var(--maroon);
+
+    margin: 16px 0;
+}
+
+.hero-content > p {
+    max-width: 570px;
+
+    color: var(--gray);
+
+    font-size: 0.98rem;
+
+    line-height: 1.75;
+}
+
+.hero-buttons {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.hero-image {
+    display: flex;
+
+    justify-content: center;
+}
+
+.hero-image img {
+    width: min(100%, 510px);
+}
+
+
+/* =========================================
+   HERO TRUST
+========================================= */
+
+.hero-trust {
+    display: flex;
+
+    gap: 32px;
+
+    margin-top: 32px;
+
+    padding-top: 20px;
+
+    border-top:
+        1px solid #dddddd;
+}
+
+.hero-trust div {
+    display: flex;
+
+    flex-direction: column;
+}
+
+.hero-trust strong {
+    color: var(--maroon);
+
+    font-size: 1.1rem;
+
+    line-height: 1.3;
+}
+
+.hero-trust span {
+    color: var(--gray);
+
+    font-size: 0.73rem;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================
+   CATEGORY GRID
+========================================= */
+
+.category-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.category-card {
+    padding: 24px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    background: var(--white);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition);
+}
+
+.category-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: var(--shadow-hover);
+
+    border-color: var(--rose);
+}
+
+.category-icon {
+    width: 46px;
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: var(--rose);
+
+    color: var(--maroon);
+
+    font-weight: bold;
+
+    font-size: 1.05rem;
+
+    margin-bottom: 17px;
+}
+
+.category-card h3 {
+    margin-bottom: 6px;
+
+    font-size: 1rem;
+}
+
+.category-card p {
+    color: var(--gray);
+
+    font-size: 0.84rem;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================
+   HOW IT WORKS
+========================================= */
+
+.how-it-works {
+    background: var(--light-bg);
+}
+
+.steps {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.step {
+    position: relative;
+
+    padding: 23px;
+
+    background: var(--white);
+
+    border-radius: var(--radius-md);
+
+    border:
+        1px solid var(--border);
+}
+
+.step-number {
+    color: var(--maroon);
+
+    font-size: 0.75rem;
+
+    font-weight: 700;
+}
+
+.step h3 {
+    margin: 16px 0 8px;
+
+    font-size: 1rem;
+}
+
+.step p {
+    color: var(--gray);
+
+    font-size: 0.84rem;
+
+    line-height: 1.65;
+}
+
+
+/* =========================================
+   FEATURED CAREERS
+========================================= */
+
+.heading-row {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    max-width: none;
+
+    gap: 20px;
+}
+
+.text-link {
+    color: var(--maroon);
+
+    font-size: 0.88rem;
+
+    font-weight: 600;
+}
+
+.career-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.career-card {
+    padding: 23px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    background: var(--white);
+
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.035);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition);
+}
+
+.career-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow: var(--shadow-hover);
+
+    border-color: var(--rose);
+}
+
+.career-tag {
+    display: inline-block;
+
+    background: var(--rose);
+
+    color: var(--maroon);
+
+    padding: 4px 8px;
+
+    border-radius: 50px;
+
+    font-size: 0.65rem;
+
+    font-weight: 700;
+
+    margin-bottom: 14px;
+}
+
+.career-card h3 {
+    margin-bottom: 7px;
+
+    font-size: 1rem;
+}
+
+.career-card p {
+    color: var(--gray);
+
+    font-size: 0.83rem;
+
+    line-height: 1.6;
+
+    margin-bottom: 16px;
+}
+
+.career-card a {
+    color: var(--maroon);
+
+    font-weight: 600;
+
+    font-size: 0.78rem;
+}
+
+
+/* =========================================
+   COMPARE BANNER
+========================================= */
+
+.compare-banner {
+    background: var(--maroon);
+
+    color: var(--white);
+}
+
+.compare-content {
+    max-width: 700px;
+
+    text-align: center;
+
+    margin: auto;
+}
+
+.compare-content .section-label {
+    color: var(--rose);
+}
+
+.compare-content h2 {
+    font-size:
+        clamp(1.8rem, 3.2vw, 2.45rem);
+
+    line-height: 1.2;
+
+    margin: 10px 0;
+}
+
+.compare-content p {
+    opacity: 0.84;
+
+    font-size: 0.92rem;
+
+    line-height: 1.7;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================
+   ROADMAP
+========================================= */
+
+.roadmap-container {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 50px;
+
+    align-items: center;
+}
+
+.roadmap-content h2 {
+    font-size:
+        clamp(1.8rem, 3.2vw, 2.45rem);
+
+    line-height: 1.2;
+
+    letter-spacing: -0.5px;
+
+    margin: 10px 0 13px;
+}
+
+.roadmap-content p {
+    color: var(--gray);
+
+    font-size: 0.93rem;
+
+    line-height: 1.7;
+
+    margin-bottom: 22px;
+}
+
+.roadmap-line {
+    border-left:
+        2px solid var(--rose);
+
+    padding-left: 27px;
+}
+
+.roadmap-point {
+    position: relative;
+
+    margin-bottom: 25px;
+}
+
+.roadmap-point span {
+    position: absolute;
+
+    left: -43px;
+
+    width: 29px;
+    height: 29px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: var(--white);
+
+    border:
+        2px solid var(--maroon);
+
+    color: var(--maroon);
+
+    font-size: 0.75rem;
+
+    font-weight: bold;
+}
+
+.roadmap-point.completed span {
+    background: var(--maroon);
+
+    color: var(--white);
+}
+
+
+/* =========================================
+   AI SECTION
+========================================= */
+
+.ai-section {
+    background: var(--light-bg);
+}
+
+.ai-card {
+    background: var(--maroon);
+
+    color: var(--white);
+
+    border-radius: var(--radius-lg);
+
+    padding: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 35px;
+
+    overflow: hidden;
+}
+
+.ai-content {
+    max-width: 620px;
+}
+
+.ai-badge {
+    color: var(--rose);
+
+    font-size: 0.78rem;
+
+    font-weight: 700;
+}
+
+.ai-card h2 {
+    font-size:
+        clamp(1.8rem, 3.2vw, 2.45rem);
+
+    line-height: 1.2;
+
+    margin: 10px 0;
+}
+
+.ai-card p {
+    opacity: 0.84;
+
+    font-size: 0.92rem;
+
+    line-height: 1.7;
+
+    margin-bottom: 22px;
+}
+
+.ai-symbol {
+    font-size: 7rem;
+
+    opacity: 0.12;
+}
+
+
+/* =========================================
+   FINAL CTA
+========================================= */
+
+.final-cta {
+    text-align: center;
+}
+
+.final-cta h2 {
+    font-size:
+        clamp(1.8rem, 3.2vw, 2.45rem);
+
+    line-height: 1.2;
+
+    margin-bottom: 10px;
+}
+
+.final-cta p {
+    color: var(--gray);
+
+    font-size: 0.92rem;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    background: #111111;
+
+    color: var(--white);
+
+    padding-top: 52px;
+}
+
+.footer-container {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 45px;
+
+    padding-bottom: 42px;
+}
+
+.footer-brand {
+    max-width: 330px;
+}
+
+.footer-brand img {
+    width: 155px;
+
+    margin-bottom: 13px;
+}
+
+.footer-brand p {
+    color: #aaaaaa;
+
+    font-size: 0.84rem;
+
+    line-height: 1.7;
+}
+
+.footer-links {
+    display: flex;
+
+    gap: 80px;
+}
+
+.footer-links div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.footer-links h4 {
+    margin-bottom: 8px;
+
+    font-size: 0.9rem;
+}
+
+.footer-links a {
+    color: #aaaaaa;
+
+    font-size: 0.82rem;
+
+    transition:
+        color var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--white);
+}
+
+.footer-bottom {
+    border-top:
+        1px solid #333333;
+
+    text-align: center;
+
+    padding: 17px;
+
+    color: #888888;
+
+    font-size: 0.75rem;
+}
+
+
+/* =========================================
+   FLOATING AI BUTTON
+========================================= */
+
+.ai-floating {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+.ai-message {
+    background: var(--white);
+
+    color: var(--black);
+
+    padding: 8px 13px;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 7px 25px rgba(0, 0, 0, 0.13);
+
+    font-size: 0.78rem;
+
+    font-weight: 600;
+
+    animation:
+        aiMessageFloat 3s ease-in-out infinite;
+}
+
+.ai-floating-button {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--maroon);
+
+    border:
+        3px solid var(--white);
+
+    box-shadow:
+        0 8px 25px rgba(128, 0, 32, 0.22);
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.ai-floating-button:hover {
+    transform:
+        translateY(-3px) scale(1.04);
+
+    box-shadow:
+        0 13px 30px rgba(128, 0, 32, 0.3);
+}
+
+.ai-floating-button img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =========================================
+   AI MESSAGE ANIMATION
+========================================= */
+
+@keyframes aiMessageFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+}

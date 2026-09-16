@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compare Careers | Career Copilot</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/compare.css">
+    <link rel="stylesheet" href="../CSS/responsive.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+            <a href="../index.html" class="logo">
+                <img
+                    src="../assests/logo-image.png"
+                    alt="Career Copilot"
+                >
+            </a>
+
+
+            <nav class="nav-links" id="navLinks">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+                <a href="explore.html">
+                    Explore
+                </a>
+
+                <a href="compare.html" class="active">
+                    Compare
+                </a>
+
+                <a href="roadmaps.html">
+                    Roadmaps
+                </a>
+
+                <a href="ai-assistant.html">
+                    AI Assistant
+                </a>
+
+            </nav>
+
+
+            <div class="nav-actions">
+
+                <a href="login.html" class="nav-login">
+                    Login
+                </a>
+
+                <a href="register.html" class="btn btn-primary">
+                    Get Started
+                </a>
+
+            </div>
+
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Open menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="compare-page">
+
+        <!-- PAGE INTRO -->
+
+        <section class="compare-hero">
+
+            <div class="compare-hero-content">
+
+                <span class="compare-badge">
+                    Career comparison
+                </span>
+
+                <h1>
+                    Find Your Career Match
+                </h1>
+
+                <p>
+                    Tell us about yourself and we'll compare your profile
+                    with different career paths to help you find the right direction.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FIELD SELECTION ================= -->
+
+        <section class="field-section" id="fieldSelection">
+
+            <div class="section-heading">
+
+                <span class="step-label">
+                    Step 1
+                </span>
+
+                <h2>
+                    Which field interests you?
+                </h2>
+
+                <p>
+                    Choose a field and we'll ask questions specifically
+                    related to careers in that area.
+                </p>
+
+            </div>
+
+
+            <div class="field-grid">
+
+                <button class="field-option" data-field="technology">
+
+                    <span class="field-icon">💻</span>
+
+                    <span class="field-name">
+                        Technology
+                    </span>
+
+                    <span class="field-description">
+                        Software, data, cybersecurity and more
+                    </span>
+
+                </button>
+
+
+                <button class="field-option" data-field="healthcare">
+
+                    <span class="field-icon">🩺</span>
+
+                    <span class="field-name">
+                        Healthcare
+                    </span>
+
+                    <span class="field-description">
+                        Medicine, care and human wellbeing
+                    </span>
+
+                </button>
+
+
+                <button class="field-option" data-field="business">
+
+                    <span class="field-icon">📈</span>
+
+                    <span class="field-name">
+                        Business
+                    </span>
+
+                    <span class="field-description">
+                        Management, marketing and entrepreneurship
+                    </span>
+
+                </button>
+
+
+                <button class="field-option" data-field="creative">
+
+                    <span class="field-icon">🎨</span>
+
+                    <span class="field-name">
+                        Creative
+                    </span>
+
+                    <span class="field-description">
+                        Design, content and creative work
+                    </span>
+
+                </button>
+
+
+                <button class="field-option" data-field="education">
+
+                    <span class="field-icon">📚</span>
+
+                    <span class="field-name">
+                        Education
+                    </span>
+
+                    <span class="field-description">
+                        Teaching, learning and development
+                    </span>
+
+                </button>
+
+
+                <button class="field-option" data-field="science">
+
+                    <span class="field-icon">🔬</span>
+
+                    <span class="field-name">
+                        Science
+                    </span>
+
+                    <span class="field-description">
+                        Research, experiments and discovery
+                    </span>
+
+                </button>
+
+
+                <button class="field-option" data-field="others">
+
+                    <span class="field-icon">🧭</span>
+
+                    <span class="field-name">
+                        Others
+                    </span>
+
+                    <span class="field-description">
+                        Explore other career possibilities
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <div class="start-comparison-wrapper">
+
+                <button
+                    id="startComparison"
+                    class="primary-button"
+                    disabled
+                >
+                    Start Comparison
+                    <span>→</span>
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= QUESTIONS ================= -->
+
+        <section
+            class="dynamic-questions"
+            id="dynamicQuestions"
+            hidden
+        >
+
+            <!-- PROGRESS -->
+
+            <div class="compare-progress-section">
+
+                <div class="progress-top">
+
+                    <span id="progressText">
+                        Question 1
+                    </span>
+
+                    <span id="progressPercentage">
+                        0%
+                    </span>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="progressFill"
+                    ></div>
+
+                </div>
+
+
+                <div
+                    class="compare-progress"
+                    id="compareProgress"
+                ></div>
+
+            </div>
+
+
+            <!-- QUESTION CARD -->
+
+            <div class="compare-form-card">
+
+                <div id="questionContainer">
+
+                    <!-- JavaScript inserts questions here -->
+
+                </div>
+
+
+                <!-- NAVIGATION -->
+
+                <div class="compare-navigation">
+
+                    <button
+                        type="button"
+                        id="previousBtn"
+                        class="secondary-button"
+                    >
+                        ← Previous
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="nextBtn"
+                        class="primary-button"
+                    >
+                        Next
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RESULTS ================= -->
+
+        <section
+            class="comparison-result"
+            id="comparisonResult"
+            hidden
+        >
+
+            <!-- JavaScript inserts result here -->
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= AI FLOATING BUTTON ================= -->
+
+    <div class="ai-floating">
+
+        <div class="ai-message">
+            Any doubt? I can help you.
+        </div>
+
+        <a
+            href="ai-assistant.html"
+            class="ai-floating-button"
+            aria-label="Open Career Copilot AI"
+        >
+
+            <img
+                src="../assests/ai-bot.png"
+                alt="Career Copilot AI Assistant"
+            >
+
+        </a>
+
+    </div>
+
+
+    <!-- ================= SCRIPTS ================= -->
+
+    <script src="../JavaScript/main.js"></script>
+
+    <script src="../data/careers.js"></script>
+
+    <script src="../data/questions.js"></script>
+
+    <script src="../JavaScript/compare.js"></script>
+
+    <script src="../JavaScript/auth.js"></script>
+
+</body>
+
+</html>

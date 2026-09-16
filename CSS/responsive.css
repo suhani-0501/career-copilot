@@ -1,0 +1,284 @@
+@media (max-width: 900px) {
+
+    .compare-form-card {
+        padding: 35px;
+    }
+
+    .option-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .compare-page {
+        padding: 40px 0 70px;
+    }
+
+
+    .compare-header {
+        margin-bottom: 30px;
+
+        & h1 {
+            font-size: 2rem;
+        }
+
+        & p {
+            font-size: 0.85rem;
+        }
+    }
+
+
+    .compare-form-card {
+        padding: 25px 20px;
+
+        border-radius: 15px;
+    }
+
+
+    .compare-progress {
+        margin-bottom: 25px;
+    }
+
+
+    .progress-step {
+        min-width: 45px;
+
+        & span {
+            width: 30px;
+            height: 30px;
+        }
+
+        & p {
+            font-size: 0.6rem;
+        }
+    }
+
+
+    .option-grid,
+    .career-choice-grid,
+    .level-options {
+        grid-template-columns: 1fr;
+    }
+
+
+    .compare-question {
+
+        & h2 {
+            font-size: 1.25rem;
+        }
+    }
+
+
+    .compare-navigation {
+
+        & .btn {
+            padding: 10px 14px;
+
+            font-size: 0.8rem;
+        }
+    }
+
+
+    .match-score {
+        flex-direction: column;
+
+        text-align: center;
+
+        padding: 30px 20px;
+    }
+
+
+    .skill-comparison {
+        grid-template-columns: 1fr;
+
+        padding: 30px 20px;
+    }
+
+
+    .result-top {
+        padding: 30px 20px;
+    }
+
+
+    .result-advice {
+        padding: 25px 20px;
+    }
+
+
+    .result-actions {
+        flex-direction: column;
+
+        padding: 0 20px 30px;
+
+        & .btn {
+            width: 100%;
+        }
+    }
+
+}
+
+
+/* =========================================================
+   COMPARE PAGE RESPONSIVE
+   ========================================================= */
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 900px) {
+
+    .field-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .best-match-card {
+        align-items: flex-start;
+    }
+
+
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 600px) {
+
+    .compare-hero {
+        padding: 55px 18px 35px;
+    }
+
+
+    .field-section,
+    .dynamic-questions,
+    .comparison-result {
+        width: min(
+            100% - 30px,
+            100%
+        );
+    }
+
+
+    .field-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .field-option {
+        min-height: 145px;
+    }
+
+
+    .compare-form-card {
+        padding: 25px 18px;
+        border-radius: 18px;
+    }
+
+
+    .question-options {
+        grid-template-columns: 1fr;
+    }
+
+
+    .compare-navigation {
+        flex-direction: column-reverse;
+    }
+
+
+    .compare-navigation button {
+        width: 100%;
+    }
+
+
+    .best-match-card {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 25px;
+    }
+
+
+    .best-match-info {
+        align-items: flex-start;
+    }
+
+
+    .match-score {
+        width: 105px;
+        height: 105px;
+        align-self: center;
+    }
+
+
+    .result-actions {
+        flex-direction: column;
+    }
+
+
+    .result-actions button {
+        width: 100%;
+    }
+
+
+    .match-item {
+        align-items: flex-start;
+    }
+
+
+    .small-score {
+        margin-left: auto;
+    }
+
+
+    .ai-floating {
+        right: 15px;
+        bottom: 15px;
+    }
+
+
+    .ai-message {
+        display: none;
+    }
+
+
+    .ai-floating-button {
+        width: 60px;
+        height: 60px;
+    }
+
+}
+
+
+/* ================= VERY SMALL ================= */
+
+@media (max-width: 380px) {
+
+    .compare-hero-content h1 {
+        font-size: 2rem;
+    }
+
+
+    .field-option {
+        padding: 20px;
+    }
+
+
+    .result-career-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+
+
+    .best-match-info h2 {
+        font-size: 1.45rem;
+    }
+
+}

@@ -1,0 +1,259 @@
+/* =========================================
+   CAREER COPIOLIT
+   REGISTER PAGE
+========================================= */
+
+.register-page {
+    min-height: calc(100vh - 76px);
+
+    padding: 35px;
+
+    background: var(--light-bg);
+}
+
+
+/* =========================================
+   LARGE BACKGROUND CONTAINER
+========================================= */
+
+.register-background {
+    width: 100%;
+
+    min-height: calc(100vh - 146px);
+
+    padding: 50px;
+
+    border-radius: 24px;
+
+    background-image:
+        linear-gradient(
+            rgba(92, 0, 24, 0.12),
+            rgba(17, 17, 17, 0.12)
+        ),
+        url("../assests/registration-img.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+}
+
+
+/* =========================================
+   REGISTER CARD
+========================================= */
+
+.register-card {
+    width: 470px;
+
+    max-width: 100%;
+
+    padding: 38px 40px;
+
+    background: var(--white);
+
+    border-radius: 22px;
+
+    border: 1px solid rgba(128, 0, 32, 0.08);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================
+   REGISTER CONTENT
+========================================= */
+
+.register-content h1 {
+    margin-bottom: 7px;
+
+    color: var(--maroon);
+
+    font-size: 2rem;
+
+    line-height: 1.2;
+}
+
+
+.register-subtitle {
+    margin-bottom: 25px;
+
+    color: var(--gray);
+
+    font-size: 0.9rem;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--black);
+
+    font-size: 0.88rem;
+
+    font-weight: 600;
+}
+
+
+.form-group input {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: var(--white);
+
+    color: var(--black);
+
+    font-size: 0.93rem;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.form-group input:focus {
+    border-color: var(--maroon);
+
+    box-shadow:
+        0 0 0 3px rgba(128, 0, 32, 0.08);
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.register-message {
+    min-height: 20px;
+
+    margin: 2px 0 7px;
+
+    font-size: 0.84rem;
+}
+
+
+/* =========================================
+   REGISTER BUTTON
+========================================= */
+
+.register-button {
+    width: 100%;
+
+    padding: 13px 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: var(--maroon);
+
+    color: var(--white);
+
+    font-size: 0.98rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.register-button:hover {
+    background: var(--dark-maroon);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   LOGIN LINK
+========================================= */
+
+.login-text {
+    margin-top: 20px;
+
+    text-align: center;
+
+    color: var(--gray);
+
+    font-size: 0.88rem;
+}
+
+
+.login-text a {
+    color: var(--maroon);
+
+    font-weight: 600;
+}
+
+
+.login-text a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 768px) {
+
+    .register-page {
+        padding: 20px;
+    }
+
+
+    .register-background {
+        min-height: calc(100vh - 116px);
+
+        padding: 25px;
+
+        justify-content: center;
+
+        border-radius: 18px;
+    }
+
+
+    .register-card {
+        width: 100%;
+
+        padding: 30px 25px;
+
+        border-radius: 18px;
+    }
+
+
+    .register-content h1 {
+        font-size: 1.75rem;
+    }
+
+}

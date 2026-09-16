@@ -1,0 +1,931 @@
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard-page {
+    min-height: calc(100vh - 76px);
+    padding: 42px 0 70px;
+    background: var(--light-bg);
+}
+
+
+/* =========================================================
+   DASHBOARD HEADER
+========================================================= */
+
+.dashboard-header {
+    margin-bottom: 28px;
+}
+
+.dashboard-header h1 {
+    margin: 0 0 6px;
+    color: var(--black);
+    font-size: clamp(1.7rem, 3.5vw, 2.35rem);
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.dashboard-header h1 span {
+    color: var(--maroon);
+}
+
+.dashboard-header p {
+    margin: 0;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   DASHBOARD CARDS
+========================================================= */
+
+.dashboard-card {
+    background: var(--white);
+    border: 1px solid #eee1e4;
+    border-radius: var(--radius-md);
+    padding: 21px;
+    box-shadow: 0 7px 25px rgba(40, 10, 20, 0.045);
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+    border-color: #e8d5da;
+    box-shadow: 0 12px 30px rgba(40, 10, 20, 0.07);
+}
+
+
+/* =========================================================
+   TOP CARDS
+========================================================= */
+
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   CARD HEADING
+========================================================= */
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 19px;
+}
+
+.card-heading h2 {
+    margin: 0 0 3px;
+    color: var(--black);
+    font-size: 0.98rem;
+    line-height: 1.3;
+}
+
+.card-heading p {
+    margin: 0;
+    color: var(--gray);
+    font-size: 0.75rem;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   CARD ICON
+========================================================= */
+
+.card-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    background: var(--rose);
+    color: var(--maroon);
+
+    font-size: 1.05rem;
+}
+
+
+/* =========================================================
+   TASK LIST
+========================================================= */
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 9px 0;
+
+    border-bottom: 1px solid #f1e8ea;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-item input {
+    width: 16px;
+    height: 16px;
+
+    flex-shrink: 0;
+
+    accent-color: var(--maroon);
+    cursor: pointer;
+}
+
+.task-item label {
+    color: #444;
+    font-size: 0.84rem;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.task-item:has(input:checked) label {
+    color: #999;
+    text-decoration: line-through;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.progress-circle {
+    width: 105px;
+    height: 105px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    border-radius: 50%;
+
+    background: conic-gradient(
+        var(--maroon) 0%,
+        #f0e5e8 0%
+    );
+}
+
+.progress-circle::before {
+    content: "";
+
+    position: absolute;
+
+    width: 78px;
+    height: 78px;
+
+    border-radius: 50%;
+    background: var(--white);
+}
+
+.progress-circle span {
+    position: relative;
+
+    color: var(--maroon);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.progress-content h3 {
+    margin: 0 0 5px;
+
+    color: var(--black);
+    font-size: 0.95rem;
+    line-height: 1.35;
+}
+
+.progress-content p {
+    margin: 0;
+
+    color: var(--gray);
+    font-size: 0.78rem;
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   TRACKING GRID
+========================================================= */
+
+.tracking-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.skills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.skill-item .skill-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 6px;
+}
+
+.skill-item .skill-info span {
+    color: #555;
+    font-size: 0.76rem;
+}
+
+.skill-item .skill-info strong {
+    color: var(--maroon);
+    font-size: 0.74rem;
+}
+
+.skill-item .skill-bar {
+    height: 6px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+    background: #f0e7e9;
+}
+
+.skill-item .skill-progress {
+    height: 100%;
+
+    border-radius: inherit;
+    background: var(--maroon);
+}
+
+
+/* =========================================================
+   STREAK
+========================================================= */
+
+.streak-content {
+    padding: 3px 0 7px;
+    text-align: center;
+}
+
+.streak-content strong {
+    display: block;
+
+    color: var(--maroon);
+    font-size: 2.6rem;
+    line-height: 1;
+}
+
+.streak-content > span {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #555;
+    font-size: 0.84rem;
+}
+
+.streak-content p {
+    margin: 14px 0 0;
+
+    color: var(--gray);
+    font-size: 0.76rem;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   COMPLETED
+========================================================= */
+
+.completed-content {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+
+    padding: 9px 0;
+}
+
+.completed-content strong {
+    color: var(--maroon);
+    font-size: 2.6rem;
+    line-height: 1;
+}
+
+.completed-content span {
+    color: var(--gray);
+    font-size: 0.84rem;
+}
+
+
+/* =========================================================
+   SAVED CAREERS
+========================================================= */
+
+.saved-careers {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.saved-career-item {
+    padding: 10px 12px;
+
+    border-left: 3px solid var(--maroon);
+    border-radius: 8px;
+
+    background: var(--light-bg);
+
+    color: #444;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   DASHBOARD ROADMAP
+========================================================= */
+
+.dashboard-roadmap {
+    margin-top: 18px;
+    padding: 26px;
+}
+
+
+/* =========================================================
+   ROADMAP HEADER
+========================================================= */
+
+.dashboard-roadmap-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+    margin-bottom: 22px;
+}
+
+.dashboard-roadmap-header .small-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--maroon);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+}
+
+.dashboard-roadmap-header h2 {
+    margin: 0;
+
+    color: var(--black);
+    font-size: 1.35rem;
+    line-height: 1.3;
+}
+
+.dashboard-roadmap-header p {
+    margin-top: 4px;
+
+    color: var(--gray);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   ROADMAP PERCENTAGE
+========================================================= */
+
+.dashboard-roadmap-percent {
+    min-width: 80px;
+    text-align: right;
+}
+
+.dashboard-roadmap-percent strong {
+    display: block;
+
+    color: var(--maroon);
+    font-size: 1.75rem;
+    line-height: 1;
+}
+
+.dashboard-roadmap-percent span {
+    display: block;
+
+    margin-top: 4px;
+
+    color: var(--gray);
+    font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   OVERALL PROGRESS
+========================================================= */
+
+.dashboard-roadmap-overall {
+    margin-bottom: 24px;
+}
+
+.overall-progress-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+
+    font-size: 0.78rem;
+}
+
+.overall-progress-top span:first-child {
+    color: var(--black);
+    font-weight: 700;
+}
+
+.overall-progress-top span:last-child {
+    color: var(--gray);
+}
+
+.overall-progress-bar {
+    width: 100%;
+    height: 7px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+    background: var(--rose);
+}
+
+.overall-progress-fill {
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+    background: var(--maroon);
+
+    transition: width 0.4s ease;
+}
+
+
+/* =========================================================
+   PHASE GRID
+========================================================= */
+
+.dashboard-roadmap-phases {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   PHASE CARD
+========================================================= */
+
+.dashboard-phase-card {
+    position: relative;
+
+    padding: 18px;
+
+    border: 1px solid var(--light-gray);
+    border-radius: 13px;
+
+    background: var(--white);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        border-color var(--transition);
+}
+
+.dashboard-phase-card:hover {
+    transform: translateY(-2px);
+
+    border-color: var(--rose);
+
+    box-shadow: var(--shadow);
+}
+
+.dashboard-phase-card.completed {
+    border-color: var(--rose);
+}
+
+
+/* =========================================================
+   PHASE TOP
+========================================================= */
+
+.dashboard-phase-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 12px;
+    margin-bottom: 13px;
+}
+
+.dashboard-phase-number {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--rose);
+    color: var(--maroon);
+
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.dashboard-phase-card.completed .dashboard-phase-number {
+    background: var(--maroon);
+    color: var(--white);
+}
+
+.dashboard-phase-status {
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: #f5f5f5;
+    color: var(--gray);
+
+    font-size: 0.66rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.dashboard-phase-card.completed .dashboard-phase-status {
+    background: var(--rose);
+    color: var(--maroon);
+}
+
+
+/* =========================================================
+   PHASE TITLE
+========================================================= */
+
+.dashboard-phase-title {
+    margin-bottom: 4px;
+
+    color: var(--black);
+
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+.dashboard-phase-duration {
+    color: var(--gray);
+    font-size: 0.72rem;
+}
+
+
+/* =========================================================
+   PHASE PROGRESS
+========================================================= */
+
+.dashboard-phase-progress {
+    margin-top: 15px;
+}
+
+.dashboard-phase-progress-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 6px;
+
+    color: var(--gray);
+    font-size: 0.7rem;
+}
+
+.dashboard-phase-progress-info strong {
+    color: var(--black);
+}
+
+.dashboard-phase-progress-bar {
+    width: 100%;
+    height: 5px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+    background: var(--light-gray);
+}
+
+.dashboard-phase-progress-fill {
+    width: 0;
+    height: 100%;
+
+    border-radius: inherit;
+    background: var(--maroon);
+
+    transition: width 0.4s ease;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.dashboard-roadmap-empty {
+    grid-column: 1 / -1;
+
+    padding: 28px;
+
+    text-align: center;
+
+    border: 1px dashed #ddd;
+    border-radius: 13px;
+
+    color: var(--gray);
+    font-size: 0.82rem;
+}
+
+.dashboard-roadmap-empty strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--black);
+    font-size: 0.92rem;
+}
+
+
+/* =========================================================
+   ROADMAP FOOTER
+========================================================= */
+
+.dashboard-roadmap-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    margin-top: 23px;
+    padding-top: 18px;
+
+    border-top: 1px solid var(--light-gray);
+}
+
+.dashboard-roadmap-footer strong {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: var(--black);
+    font-size: 0.86rem;
+}
+
+.dashboard-roadmap-footer p {
+    color: var(--gray);
+    font-size: 0.74rem;
+    line-height: 1.45;
+}
+
+.dashboard-roadmap-footer .roadmap-link {
+    flex-shrink: 0;
+
+    color: var(--maroon);
+
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    transition: color var(--transition);
+}
+
+.dashboard-roadmap-footer .roadmap-link:hover {
+    color: var(--dark-maroon);
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .dashboard-page {
+        padding: 35px 0 60px;
+    }
+
+    .dashboard-stats,
+    .tracking-grid {
+        gap: 15px;
+    }
+
+    .dashboard-roadmap {
+        padding: 22px;
+    }
+
+    .dashboard-roadmap-phases {
+        gap: 13px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .dashboard-page {
+        padding: 30px 0 55px;
+    }
+
+    .dashboard-header {
+        margin-bottom: 22px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.65rem;
+    }
+
+    .dashboard-header p {
+        font-size: 0.82rem;
+    }
+
+    .dashboard-stats,
+    .tracking-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-card {
+        padding: 18px;
+    }
+
+    .progress-circle {
+        width: 92px;
+        height: 92px;
+    }
+
+    .progress-circle::before {
+        width: 69px;
+        height: 69px;
+    }
+
+    .progress-circle span {
+        font-size: 1.15rem;
+    }
+
+    .dashboard-roadmap {
+        padding: 20px;
+    }
+
+    .dashboard-roadmap-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .dashboard-roadmap-percent strong {
+        font-size: 1.5rem;
+    }
+
+    .dashboard-roadmap-phases {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-phase-card {
+        padding: 17px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE — SMALL MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+    .dashboard-page {
+        padding: 25px 0 45px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .dashboard-card {
+        border-radius: 11px;
+        padding: 16px;
+    }
+
+    .progress-content {
+        gap: 15px;
+    }
+
+    .progress-circle {
+        width: 82px;
+        height: 82px;
+    }
+
+    .progress-circle::before {
+        width: 61px;
+        height: 61px;
+    }
+
+    .progress-content h3 {
+        font-size: 0.88rem;
+    }
+
+    .progress-content p {
+        font-size: 0.74rem;
+    }
+
+    .dashboard-roadmap {
+        padding: 17px;
+    }
+
+    .dashboard-roadmap-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .dashboard-roadmap-percent {
+        text-align: left;
+    }
+
+    .dashboard-roadmap-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.dashboard-page a:focus-visible,
+.dashboard-page button:focus-visible,
+.dashboard-page input:focus-visible,
+.dashboard-page label:focus-visible {
+    outline: 2px solid var(--maroon);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .dashboard-card,
+    .dashboard-phase-card,
+    .overall-progress-fill,
+    .dashboard-phase-progress-fill,
+    .dashboard-roadmap-footer .roadmap-link {
+        transition: none;
+    }
+
+    .dashboard-card:hover,
+    .dashboard-phase-card:hover {
+        transform: none;
+    }
+}

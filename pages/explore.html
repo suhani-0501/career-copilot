@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore Careers | Career Copilot</title>
+
+    <link rel="stylesheet" href="../CSS/explore.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/responsive.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+        <div class="container nav-container">
+
+            <a href="../index.html" class="logo">
+                <img src="../assests/logo-image.png" alt="Career Copilot">
+            </a>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="../index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="explore.html" class="active">Explore</a>
+                <a href="compare.html">Compare</a>
+                <a href="roadmaps.html">Roadmaps</a>
+                <a href="ai-assistant.html">AI Assistant</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Login</a>
+                <a href="registration.html" class="btn btn-primary">Get Started</a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+                ☰
+            </button>
+
+        </div>
+    </header>
+
+
+    <!-- ================= EXPLORE PAGE ================= -->
+
+    <main class="explore-page">
+
+        <div class="container">
+
+            <!-- PAGE HEADER -->
+
+            <section class="explore-header">
+
+                <h1>Explore Careers</h1>
+
+                <p>
+                    Discover different career paths, understand what they involve,
+                    and find the direction that's right for you.
+                </p>
+
+            </section>
+
+
+            <!-- SEARCH -->
+
+            <section class="career-search">
+
+                <div class="search-box">
+
+                    <span class="search-icon">⌕</span>
+
+                    <input
+                        type="search"
+                        id="careerSearch"
+                        placeholder="Search careers, skills, or professions..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+            </section>
+
+
+            <!-- CATEGORY FILTERS -->
+
+            <section class="career-filters">
+
+                <button class="filter-btn active" data-category="all">
+                    All
+                </button>
+
+                <button class="filter-btn" data-category="technology">
+                    Technology
+                </button>
+
+                <button class="filter-btn" data-category="healthcare">
+                    Healthcare
+                </button>
+
+                <button class="filter-btn" data-category="business">
+                    Business
+                </button>
+
+                <button class="filter-btn" data-category="creative">
+                    Creative
+                </button>
+
+                <button class="filter-btn" data-category="education">
+                    Education
+                </button>
+
+                <button class="filter-btn" data-category="science">
+                    Science
+                </button>
+
+                <button class="filter-btn" data-category="others">
+                    Others
+                </button>
+
+            </section>
+
+
+            <!-- CAREER CARDS -->
+
+            <section class="career-results">
+
+                <div class="career-grid" id="careerGrid">
+                    <!-- Cards will be generated using JavaScript -->
+                </div>
+
+                <div class="no-results" id="noResults">
+                    <h3>No careers found</h3>
+                    <p>
+                        Try searching for another career or skill.
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- Career Details Section -->
+<section class="career-details-section" id="careerDetailsSection" style="display: none;">
+
+    <button class="back-to-explore-btn" id="backToExplore">
+        ← Back to Explore
+    </button>
+
+    <div class="career-details-container">
+
+        <div class="career-details-header">
+
+            <div class="career-details-icon" id="careerDetailsIcon">
+                💼
+            </div>
+
+            <div>
+                <span class="career-details-category" id="careerDetailsCategory">
+                    Technology
+                </span>
+
+                <h1 id="careerDetailsTitle">
+                    Career Name
+                </h1>
+
+                <p id="careerDetailsDescription">
+                    Career description
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="career-details-grid">
+
+            <!-- Overview -->
+            <div class="career-detail-card">
+                <h3>Career Overview</h3>
+                <p id="careerOverview"></p>
+            </div>
+
+
+            <!-- Education -->
+            <div class="career-detail-card">
+                <h3>Education Required</h3>
+                <p id="careerEducation"></p>
+            </div>
+
+
+            <!-- Skills -->
+            <div class="career-detail-card">
+                <h3>Skills You Need</h3>
+                <ul id="careerSkills"></ul>
+            </div>
+
+
+            <!-- Salary -->
+            <div class="career-detail-card">
+                <h3>Starting Salary</h3>
+                <p id="careerSalary"></p>
+            </div>
+
+
+            <!-- Famous Companies -->
+            <div class="career-detail-card">
+                <h3>Companies Hiring</h3>
+                <div id="careerCompanies"></div>
+            </div>
+
+
+            <!-- Career Growth -->
+            <div class="career-detail-card">
+                <h3>Career Growth</h3>
+                <p id="careerGrowth"></p>
+            </div>
+
+
+            <!-- Job Roles -->
+            <div class="career-detail-card">
+                <h3>Common Job Roles</h3>
+                <ul id="careerRoles"></ul>
+            </div>
+
+
+            <!-- Roadmap -->
+            <div class="career-detail-card">
+                <h3>How to Start</h3>
+                <p id="careerHowToStart"></p>
+            </div>
+
+        </div>
+
+
+        <div class="career-details-actions">
+
+            <button class="primary-btn" id="buildRoadmapBtn">
+                Build My Roadmap →
+            </button>
+
+            <button class="secondary-btn" id="compareCareerBtn">
+                Compare Career
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= AI BUBBLE ================= -->
+
+    <div class="ai-floating" id="aiFloating">
+
+        <div class="ai-message">
+            Any doubt? I can help you.
+        </div>
+
+        <a
+            href="ai-assistant.html"
+            class="ai-floating-button"
+            aria-label="Open Career Copilot AI"
+        >
+            <img
+                src="../assests/ai-bot.png"
+                alt="Career Copilot AI Assistant"
+            >
+        </a>
+
+    </div>
+
+
+    <script src="../data/careers.js"></script>
+    <script src="../JavaScript/main.js"></script>
+    <script src="../JavaScript/explore.js"></script>
+    <script src="../JavaScript/auth.js"></script>
+
+</body>
+
+</html>

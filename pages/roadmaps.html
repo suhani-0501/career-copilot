@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Build and track your personalized career roadmap with Career Copilot."
+    >
+
+    <title>Career Roadmap | Career Copilot</title>
+
+    <!-- GLOBAL CSS -->
+    <link
+        rel="stylesheet"
+        href="../CSS/style.css"
+    >
+
+    <!-- ROADMAP CSS -->
+    <link
+        rel="stylesheet"
+        href="../CSS/roadmap.css"
+    >
+
+    <!-- RESPONSIVE CSS -->
+    <link
+        rel="stylesheet"
+        href="../CSS/responsive.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
+
+<header class="navbar">
+
+    <div class="container nav-container">
+
+        <a
+            href="../index.html"
+            class="logo"
+        >
+            <img
+                src="../assests/logo-image.png"
+                alt="Career Copilot"
+            >
+        </a>
+
+
+        <nav
+            class="nav-links"
+            id="navLinks"
+        >
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="explore.html">
+                Explore
+            </a>
+
+            <a href="compare.html">
+                Compare
+            </a>
+
+            <a
+                href="roadmaps.html"
+                class="active"
+            >
+                Roadmaps
+            </a>
+
+            <a href="ai-assistant.html">
+                AI Assistant
+            </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+            <a
+                href="login.html"
+                class="btn btn-outline"
+            >
+                Login
+            </a>
+
+            <a
+                href="registration.html"
+                class="btn btn-primary"
+            >
+                Get Started
+            </a>
+
+        </div>
+
+
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Open navigation menu"
+        >
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     PAGE
+========================================================= -->
+
+<main class="roadmap-page">
+
+
+    <!-- =====================================================
+         INTRO
+    ====================================================== -->
+
+    <section class="roadmap-intro">
+
+        <div class="container roadmap-intro-inner">
+
+            <span class="roadmap-eyebrow">
+                Career Copilot Roadmaps
+            </span>
+
+            <h1>
+                Build your path.
+                <span>One step at a time.</span>
+            </h1>
+
+            <p>
+                Choose a career and get a structured learning roadmap
+                with skills, projects, tasks and milestones to help
+                you move forward.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SEARCH AREA
+    ====================================================== -->
+
+    <section
+        class="career-search-section"
+        id="careerSearchSection"
+    >
+
+        <div class="container">
+
+
+            <div class="career-search-heading">
+
+                <span class="roadmap-eyebrow">
+                    Start your roadmap
+                </span>
+
+                <h2>
+                    What career do you want to pursue?
+                </h2>
+
+                <p>
+                    Search from the careers available in Career Copilot.
+                </p>
+
+            </div>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="career-search-wrapper">
+
+                <div class="career-search-box">
+
+                    <span
+                        class="search-icon"
+                        aria-hidden="true"
+                    >
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="careerSearch"
+                        placeholder="Search a career, e.g. Web Developer"
+                        autocomplete="off"
+                        aria-label="Search careers"
+                    >
+
+                    <button
+                        type="button"
+                        id="roadmapSearchButton"
+                        class="roadmap-search-button"
+                        aria-label="Search career"
+                    >
+                        ✈
+                    </button>
+
+                </div>
+
+
+                <!-- AUTOCOMPLETE -->
+
+                <div
+                    class="career-suggestions"
+                    id="careerSuggestions"
+                ></div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 EMPTY STATE
+            ================================================== -->
+
+            <div
+                class="roadmap-empty-state"
+                id="roadmapEmptyState"
+            >
+
+                <div class="empty-state-icon">
+                    ✈
+                </div>
+
+                <h3>
+                    Choose your career to begin
+                </h3>
+
+                <p>
+                    Search for a career above and your personalized
+                    roadmap will appear here.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         ROADMAP CONTENT
+    ====================================================== -->
+
+    <section
+        class="roadmap-content"
+        id="roadmapContent"
+        hidden
+    >
+
+        <div class="container">
+
+
+            <!-- =================================================
+                 SELECTED CAREER
+            ================================================== -->
+
+            <section class="selected-career-card">
+
+                <div class="selected-career-info">
+
+                    <div
+                        class="roadmap-career-icon"
+                        id="roadmapCareerIcon"
+                    >
+                        💻
+                    </div>
+
+
+                    <div>
+
+                        <span class="roadmap-eyebrow">
+                            Your Career Roadmap
+                        </span>
+
+                        <h2 id="roadmapCareerName">
+                            Web Developer
+                        </h2>
+
+                        <p id="roadmapCareerDescription">
+                            Build websites and web applications.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="selected-career-actions">
+
+                    <button
+                        type="button"
+                        id="changeCareerButton"
+                        class="outline-button"
+                    >
+                        Change Career
+                    </button>
+
+                    <button
+                        type="button"
+                        id="startOverButton"
+                        class="danger-outline-button"
+                    >
+                        Start Over
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 MAIN 60 / 40 AREA
+            ================================================== -->
+
+            <div class="roadmap-main-grid">
+
+
+                <!-- =================================================
+                     LEFT 60%
+                ================================================== -->
+
+                <section class="roadmap-main-column">
+
+
+                    <!-- PROGRESS -->
+
+                    <div class="roadmap-progress-card">
+
+                        <div class="progress-header">
+
+                            <div>
+
+                                <span class="roadmap-eyebrow">
+                                    Your Progress
+                                </span>
+
+                                <h3>
+                                    Keep moving forward
+                                </h3>
+
+                            </div>
+
+                            <strong
+                                id="roadmapProgress"
+                                class="progress-number"
+                            >
+                                0%
+                            </strong>
+
+                        </div>
+
+
+                        <div class="progress-track">
+
+                            <div
+                                class="progress-bar"
+                                id="roadmapProgressBar"
+                            ></div>
+
+                        </div>
+
+
+                        <div class="progress-footer">
+
+                            <span id="roadmapProgressText">
+                                0% Complete
+                            </span>
+
+                            <span>
+                                Complete tasks to increase your progress.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- LEARNING JOURNEY -->
+
+                    <section class="roadmap-section">
+
+                        <div class="roadmap-section-heading">
+
+                            <span class="roadmap-eyebrow">
+                                Learning journey
+                            </span>
+
+                            <h2>
+                                Your roadmap
+                            </h2>
+
+                            <p>
+                                Follow the steps in order and tick each
+                                task when you complete it.
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            class="phase-container"
+                            id="phaseContainer"
+                        ></div>
+
+                    </section>
+
+
+
+                    <!-- PERSONAL TASKS -->
+
+                    <section class="task-manager-section">
+
+                        <div class="roadmap-section-heading">
+
+                            <span class="roadmap-eyebrow">
+                                Personal tasks
+                            </span>
+
+                            <h2>
+                                Add your own tasks
+                            </h2>
+
+                            <p>
+                                Add goals that are specific to your journey.
+                            </p>
+
+                        </div>
+
+
+                        <div class="personal-task-input-row">
+
+                            <input
+                                type="text"
+                                id="personalTaskInput"
+                                placeholder="Add a personal task..."
+                                maxlength="150"
+                            >
+
+                            <button
+                                type="button"
+                                id="addPersonalTask"
+                                class="primary-button"
+                            >
+                                Add Task
+                            </button>
+
+                        </div>
+
+
+                        <div
+                            class="personal-task-list"
+                            id="personalTaskList"
+                        >
+
+                            <div class="empty-task-message">
+                                No personal tasks yet.
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                </section>
+
+
+
+                <!-- =================================================
+                     RIGHT 40%
+                ================================================== -->
+
+                <aside class="roadmap-sidebar">
+
+
+                    <!-- SKILLS -->
+
+                    <section class="sidebar-card">
+
+                        <div class="sidebar-card-heading">
+
+                            <span class="roadmap-eyebrow">
+                                Skills
+                            </span>
+
+                            <h3>
+                                Skills you'll gain
+                            </h3>
+
+                            <p>
+                                Important abilities for this career.
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            class="skills-container"
+                            id="skillsContainer"
+                        ></div>
+
+                    </section>
+
+
+
+                    <!-- PROJECTS -->
+
+                    <section class="sidebar-card">
+
+                        <div class="sidebar-card-heading">
+
+                            <span class="roadmap-eyebrow">
+                                Practice
+                            </span>
+
+                            <h3>
+                                Projects to build
+                            </h3>
+
+                            <p>
+                                Practical projects to strengthen your portfolio.
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            class="projects-container"
+                            id="projectsContainer"
+                        ></div>
+
+                    </section>
+
+
+                </aside>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BOTTOM INFORMATION
+            ================================================== -->
+
+            <section class="roadmap-bottom-info">
+
+
+                <article class="roadmap-stat-card">
+
+                    <span>
+                        Learning time
+                    </span>
+
+                    <strong id="roadmapTotalTime">
+                        —
+                    </strong>
+
+                    <small>
+                        Estimated journey
+                    </small>
+
+                </article>
+
+
+                <article class="roadmap-stat-card">
+
+                    <span>
+                        Total tasks
+                    </span>
+
+                    <strong id="taskCount">
+                        0
+                    </strong>
+
+                    <small>
+                        Roadmap + personal
+                    </small>
+
+                </article>
+
+
+                <article class="roadmap-stat-card">
+
+                    <span>
+                        Completed
+                    </span>
+
+                    <strong id="completedTaskCount">
+                        0
+                    </strong>
+
+                    <small>
+                        Tasks finished
+                    </small>
+
+                </article>
+
+
+                <article class="roadmap-stat-card">
+
+                    <span>
+                        Learning mode
+                    </span>
+
+                    <strong>
+                        Self-paced
+                    </strong>
+
+                    <small>
+                        Learn at your speed
+                    </small>
+
+                </article>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 NEXT STEPS
+            ================================================== -->
+
+            <section class="next-steps-section">
+
+                <div class="roadmap-section-heading">
+
+                    <span class="roadmap-eyebrow">
+                        Next steps
+                    </span>
+
+                    <h2>
+                        What should I learn next?
+                    </h2>
+
+                    <p>
+                        Your next recommended learning steps.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="next-steps-list"
+                    id="nextStepsContainer"
+                ></div>
+
+            </section>
+
+            
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= AI FLOATING BUTTON ================= -->
+
+    <div class="ai-floating">
+
+        <div class="ai-message">
+            Any doubt? I can help you.
+        </div>
+
+        <a
+            href="ai-assistant.html"
+            class="ai-floating-button"
+            aria-label="Open Career Copilot AI"
+        >
+
+            <img
+                src="../assests/ai-bot.png"
+                alt="Career Copilot AI Assistant"
+            >
+
+        </a>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="../JavaScript/main.js"></script>
+
+<script src="../data/careers.js"></script>
+
+<!-- Keep this if you already have roadmap-specific data -->
+<script src="../data/roadmaps.js"></script>
+
+<script src="../JavaScript/taskManager.js"></script>
+
+<script src="../JavaScript/roadmap.js"></script>
+
+<script src="../JavaScript/auth.js"></script>
+
+
+<script>
+
+    /* =========================================
+       MOBILE NAVIGATION
+    ========================================= */
+
+    const menuToggle =
+        document.getElementById("menuToggle");
+
+    const navLinks =
+        document.getElementById("navLinks");
+
+
+    if (menuToggle && navLinks) {
+
+        menuToggle.addEventListener("click", function () {
+
+            navLinks.classList.toggle("mobile-open");
+
+        });
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
