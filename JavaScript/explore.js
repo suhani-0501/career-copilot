@@ -516,9 +516,11 @@ function openCareerDetails(career) {
        -------------------------------- */
 
     if (careerDetailsIcon) {
+        const iconName = careerIcons[career.id] || "briefcase";
 
-        careerDetailsIcon.textContent =
-            career.icon || "💼";
+        careerDetailsIcon.innerHTML = `
+            <i class="fa-solid fa-${iconName}"></i>
+        `;
     }
 
 
