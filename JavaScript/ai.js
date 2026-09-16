@@ -9,7 +9,7 @@
    GEMINI API SETTINGS
 ========================================= */
 
-const API_KEY = "AQ.Ab8RN6LasxZxE5M9uX5QX0rMa-_yeFT1qr1czBDpwi433y67mQ";
+const API_KEY = "AQ.Ab8RN6I5vC1PadDkqoAZZyhGg6yfWGE3ivmuQpoAWeUw2i-F2g";
 
 const API_URL =
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent";
@@ -613,7 +613,6 @@ async function getGeminiResponse(userMessage) {
         console.log("Sending message to Gemini:", userMessage);
 
         const response = await fetch(API_URL, {
-
             method: "POST",
 
             headers: {
@@ -622,26 +621,28 @@ async function getGeminiResponse(userMessage) {
             },
 
             body: JSON.stringify({
+                systemInstruction: {
+                    parts: [
+                        {
+                            text: ALDEN_PROMPT
+                        }
+                    ]
+                },
 
                 contents: [
                     {
                         role: "user",
                         parts: [
                             {
-                                text:
-                                    ALDEN_PROMPT +
-                                    "\n\nUSER QUESTION:\n" +
-                                    userMessage
+                                text: userMessage
                             }
                         ]
                     }
                 ]
-
             })
-
         });
 
-        console.log("HTTP Status:", response.status);
+        console.log("Gemini HTTP Status:", response.status);
 
         const data = await response.json();
 
@@ -651,22 +652,23 @@ async function getGeminiResponse(userMessage) {
 
             console.error("Gemini API Error:", data);
 
+            const errorMessage =
+                data?.error?.message ||
+                "Unknown Gemini API error.";
+
             if (response.status === 401) {
-                return "Alden authentication failed. Please check the Gemini API key and its project restrictions.";
+                return "Alden authentication failed: " + errorMessage;
             }
 
             if (response.status === 403) {
-                return "Alden is not authorized to use this Gemini API project. Please check the API key permissions.";
+                return "Alden does not have permission to use this Gemini project: " + errorMessage;
             }
 
             if (response.status === 429) {
-                return "Alden has temporarily reached the Gemini API quota. Please try again later.";
+                return "Alden has reached the Gemini API quota. Please try again later.";
             }
 
-            return (
-                "Gemini API Error: " +
-                (data.error?.message || "Unknown error")
-            );
+            return "Gemini API Error: " + errorMessage;
         }
 
         const text =
