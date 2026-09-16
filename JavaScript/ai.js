@@ -1,470 +1,1192 @@
-/* =========================================================
+/* =========================================
    CAREER COPIOLIT
-   AUTHENTICATION SYSTEM
-========================================================= */
+   ALDEN AI ASSISTANT
+   GEMINI API
+========================================= */
 
-(function () {
 
-    "use strict";
+/* =========================================
+   GEMINI API SETTINGS
+========================================= */
 
+const API_KEY = "AQ.Ab8RN6LasxZxE5M9uX5QX0rMa-_yeFT1qr1czBDpwi433y67mQ";
 
-    /* =====================================================
-       STORAGE KEYS
-    ===================================================== */
+const API_URL =
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent";
 
-    const USER_KEY = "careerCopilotUser";
-    const LOGIN_KEY = "careerCopilotLoggedIn";
 
+const ALDEN_PROMPT = `
+You are Alden, the AI career assistant of Career Copilot.
 
-    /* =====================================================
-       PUBLIC PAGES
-    ===================================================== */
+DEVELOPER:
+The website was developed by Suhani Thakur.
 
-    const PUBLIC_PAGES = [
-        "",
-        "index.html",
-        "login.html",
-        "register.html",
-        "registration.html"
-    ];
+If a user asks who developed, created, built, or made this website,
+Career Copilot, or this project, answer:
 
+"Career Copilot was developed by Suhani Thakur."
 
-    /* =====================================================
-       GET REGISTERED USER
-    ===================================================== */
+You can also briefly explain that Suhani Thakur developed the project
+as a career guidance platform.
 
-    function getCurrentUser() {
+Do not invent another developer's name.
 
-        try {
+Help students and beginners with:
+- Career guidance
+- Skills
+- Learning roadmaps
+- Resume building
+- Interview preparation
+- Internships
+- Freelancing
+- Practice resources
+- Coding platforms
+- Projects
+- Job preparation
+- Career confusion
 
-            const savedUser =
-                localStorage.getItem(USER_KEY);
+RESPONSE STRUCTURE:
 
-            if (!savedUser) {
-                return null;
-            }
+Always make your answer easy to scan.
 
-            const user =
-                JSON.parse(savedUser);
+NEVER write the entire response as one large paragraph.
 
-            if (
-                !user ||
-                typeof user !== "object" ||
-                !user.email ||
-                !user.password
-            ) {
-                return null;
-            }
+Use short paragraphs of 1–3 sentences.
 
-            return user;
+Put a blank line between separate ideas.
 
-        } catch (error) {
+When explaining multiple things, divide the response into clear sections.
 
-            console.error(
-                "Career Copilot: Could not read user data.",
-                error
-            );
+Use simple section headings such as:
 
-            return null;
-        }
-    }
+Recommended Direction
 
+Skills to Learn
 
-    /* =====================================================
-       CHECK LOGIN STATUS
-    ===================================================== */
+Practice
 
-    function isLoggedIn() {
+Projects
 
-        const user = getCurrentUser();
+Recommended Resources
 
-        const loginStatus =
-            localStorage.getItem("careerCopilotLoggedIn");
+Next Steps
 
-        return (
-            user !== null &&
-            loginStatus === "true"
-        );
-    }
+When giving multiple items, put EACH item on its own line.
 
+Use this format:
 
-    /* =====================================================
-       GET CURRENT PAGE
-    ===================================================== */
+Skills to Learn
 
-    function getCurrentPage() {
+• HTML — Learn webpage structure.
 
-        return window.location.pathname
-            .split("/")
-            .pop()
-            .toLowerCase();
-    }
+• CSS — Learn styling and layouts.
 
+• JavaScript — Learn programming and interactivity.
 
-    /* =====================================================
-       CHECK PUBLIC PAGE
-    ===================================================== */
+When giving a step-by-step plan, use:
 
-    function isPublicPage() {
+Next Steps
 
-        return PUBLIC_PAGES.includes(
-            getCurrentPage()
-        );
-    }
+1. Learn HTML
 
+Start with the basic structure of webpages.
 
-    /* =====================================================
-       SHOW LOGIN MESSAGE
-    ===================================================== */
+2. Learn CSS
 
-    function showLoginMessage() {
+Learn layouts, colors, spacing and responsive design.
 
-        alert(
-            "Please log in first to access this page."
-        );
-    }
+3. Learn JavaScript
 
+Learn variables, functions, DOM manipulation and events.
 
-    /* =====================================================
-       REDIRECT TO LOGIN
-    ===================================================== */
+IMPORTANT:
 
-    function redirectToLogin() {
+Never put multiple bullet points in the same paragraph.
 
-        showLoginMessage();
+Never put a heading directly beside a paragraph.
 
-        window.location.href =
-            "login.html";
-    }
+Never put a heading directly beside a bullet point.
 
+Always use a blank line between major sections.
 
-    /* =====================================================
-       PROTECT CURRENT PAGE
-    ===================================================== */
+Keep explanations concise.
 
-    function protectPage() {
+Do not use Markdown formatting.
 
-        if (isPublicPage()) {
-            return;
-        }
+Do not use:
+**bold**
+*italic*
+### headings
+Markdown tables
+Markdown code blocks
+---
 
+Use plain text headings, bullets using •, and numbered steps.
+`;
 
-        if (isLoggedIn()) {
-            return;
-        }
+/* =========================================
+   ELEMENTS
+========================================= */
 
+const aiContainer = document.getElementById("aiContainer");
+const aiWelcome = document.getElementById("aiWelcome");
+const chatHeader = document.getElementById("chatHeader");
+const chatArea = document.getElementById("chatArea");
+const suggestedQuestions = document.getElementById("suggestedQuestions");
+const chatInput = document.getElementById("chatInput");
+const sendButton = document.getElementById("sendButton");
 
-        redirectToLogin();
-    }
+let chatStarted = false;
+let isWaitingForAI = false;
 
 
-    /* =====================================================
-       CHECK INTERNAL LINK
-    ===================================================== */
+/* =========================================
+   GEMINI AI FUNCTION
+========================================= */
 
-    function isProtectedLink(link) {
+async function gemini_ai(user_input) {
 
-        if (!link) {
-            return false;
-        }
+    /*
+       Put your NEW Gemini API key here.
 
-        const href =
-            link.getAttribute("href");
+       Do NOT use the key you previously pasted.
+    */
 
-        if (!href) {
-            return false;
-        }
 
+    /* =====================================
+       ALDEN CUSTOM PROMPT
+    ===================================== */
 
-        /* Ignore anchors and external links */
+    const CUSTOM_PROMPT = `
 
-        if (
-            href.startsWith("#") ||
-            href.startsWith("http://") ||
-            href.startsWith("https://") ||
-            href.startsWith("mailto:") ||
-            href.startsWith("tel:") ||
-            href.startsWith("javascript:")
-        ) {
-            return false;
-        }
+You are Alden, the AI career assistant for Career Copilot.
 
+Your purpose is to help students and users with career development.
 
-        /* Remove query string and hash */
+You can help with:
 
-        const page =
-            href
-                .split("?")[0]
-                .split("#")[0]
-                .split("/")
-                .pop()
-                .toLowerCase();
+- Career exploration
+- Choosing and comparing careers
+- Career guidance
+- Skills required for careers
+- Learning roadmaps
+- Programming and technical skills
+- DSA and coding practice
+- Projects and portfolio building
+- Resume and CV improvement
+- Interview preparation
+- Internship preparation
+- Freelancing
+- Early career opportunities
+- Professional development
+- Career confusion and decision making
 
+Give practical, honest and useful answers.
 
-        /* Public pages */
+For career recommendations, consider the user's interests,
+strengths, skills, goals and preferred type of work.
 
-        if (
-            PUBLIC_PAGES.includes(page)
-        ) {
-            return false;
-        }
+For learning questions, explain what to learn first,
+what to learn next, and how to practice.
 
+For programming questions, explain concepts clearly
+and provide examples when useful.
 
-        /* Every other HTML page is protected */
+For DSA questions, you may recommend established
+practice platforms such as LeetCode, HackerRank,
+CodeChef, Codeforces and GeeksforGeeks.
 
-        return page.endsWith(".html");
-    }
+For resume questions, give specific improvements.
+Do not invent achievements, experience or skills
+that the user does not have.
 
+For freelancing questions, provide realistic beginner
+steps. Never guarantee income, clients or employment.
 
-    /* =====================================================
-       PROTECT LINKS
-    ===================================================== */
+Do not fabricate websites, courses, companies,
+certifications or resources.
 
-    function protectLinks() {
+Do not claim that you searched the internet unless
+a search capability is actually available.
 
-        const links =
-            document.querySelectorAll(
-                "a[href]"
-            );
+If you are unsure about a current resource,
+tell the user to verify that the resource is still active.
 
+Keep your tone friendly, professional and helpful.
 
-        links.forEach(function (link) {
+You are Alden, a career mentor inside Career Copilot.
 
-            if (!isProtectedLink(link)) {
-                return;
-            }
+`;
 
 
-            link.addEventListener(
-                "click",
-                function (event) {
+    /* =====================================
+       GEMINI REQUEST
+    ===================================== */
 
-                    if (isLoggedIn()) {
-                        return;
+    const response = await fetch(API_URL, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+            systemInstruction: {
+
+                parts: [
+
+                    {
+                        text: CUSTOM_PROMPT
                     }
 
+                ]
 
-                    event.preventDefault();
-                    event.stopPropagation();
+            },
 
-                    redirectToLogin();
+            contents: [
+
+                {
+                    parts: [
+
+                        {
+                            text: user_input
+                        }
+
+                    ]
 
                 }
-            );
 
-        });
+            ]
 
-    }
+        })
 
-
-    /* =====================================================
-       LOGOUT
-    ===================================================== */
-
-    function logout() {
-
-        const confirmed =
-            window.confirm(
-                "Are you sure you want to logout?"
-            );
+    });
 
 
-        /* Cancel */
+    /* =====================================
+       GET RESPONSE DATA
+    ===================================== */
 
-        if (!confirmed) {
-            return;
-        }
+    const data = await response.json();
 
 
-        /* =================================================
-           IMPORTANT
-           
-           DO NOT DELETE careerCopilotUser.
-           
-           That contains the registered account.
-        ================================================= */
+    console.log(data);
 
-        localStorage.removeItem(
-            LOGIN_KEY
+
+    /* =====================================
+       HANDLE API ERROR
+    ===================================== */
+
+    if (!response.ok) {
+
+        console.error(
+            "Gemini API Error:",
+            data
         );
 
-
-        /* Go to Home */
-
-        const currentPage =
-            getCurrentPage();
-
-
-        if (
-            currentPage === "index.html" ||
-            currentPage === ""
-        ) {
-
-            window.location.reload();
-
-        } else {
-
-            window.location.href =
-                "../index.html";
-        }
+        return "Sorry, I couldn't connect to Alden right now. Please try again.";
 
     }
 
 
-    /* =====================================================
-       UPDATE NAVBAR
-    ===================================================== */
+    if (
+        !data ||
+        !data.candidates ||
+        !data.candidates[0] ||
+        !data.candidates[0].content ||
+        !data.candidates[0].content.parts
+    ) {
 
-    function updateNavbar() {
-
-        const navActions =
-            document.querySelectorAll(
-                ".nav-actions"
-            );
-
-
-        navActions.forEach(
-            function (actions) {
-
-                if (
-                    actions.dataset.authReady === "true"
-                ) {
-                    return;
-                }
-
-                actions.dataset.authReady =
-                    "true";
-
-
-                /* LOGGED-IN STATE */
-
-                if (isLoggedIn()) {
-
-                    actions.innerHTML = "";
-
-
-                    const logoutButton =
-                        document.createElement(
-                            "button"
-                        );
-
-
-                    logoutButton.type =
-                        "button";
-
-
-                    logoutButton.className =
-                        "btn btn-outline logout-btn";
-
-
-                    logoutButton.textContent =
-                        "Logout";
-
-
-                    logoutButton.addEventListener(
-                        "click",
-                        logout
-                    );
-
-
-                    actions.appendChild(
-                        logoutButton
-                    );
-
-                }
-
-            }
-        );
+        return "Sorry, I couldn't generate a response right now.";
 
     }
 
 
-    /* =====================================================
-       LOGIN PAGE
-    ===================================================== */
+    /* =====================================
+       GET AI TEXT
+    ===================================== */
 
-    function handleLoginPage() {
+    const ai_output =
+        data.candidates[0].content.parts[0].text;
 
-        /*
-        * Login redirection is handled by login.js
-        * after successful authentication.
-        *
-        * auth.js only protects pages.
-        */
 
+    return ai_output;
+
+}
+
+
+/* =========================================
+   START CHAT
+========================================= */
+
+function startChat() {
+
+    if (chatStarted) {
         return;
     }
 
+    chatStarted = true;
 
-    /* =====================================================
-       REGISTRATION PAGE
-    ===================================================== */
+    aiContainer.classList.add("chat-started");
 
-    function handleRegistrationPage() {
-
-        const page =
-            getCurrentPage();
+    suggestedQuestions.style.display = "none";
 
 
-        if (
-            page !== "register.html" &&
-            page !== "registration.html"
-        ) {
-            return;
-        }
+    setTimeout(() => {
+
+        chatHeader.style.display = "block";
+
+    }, 100);
 
 
-        /* Already logged in */
+    setTimeout(() => {
 
-        if (isLoggedIn()) {
+        chatInput.focus();
 
-            window.location.href =
-                "dashboard.html";
-        }
+    }, 500);
+
+}
+
+
+/* =========================================
+   ADD USER MESSAGE
+========================================= */
+
+function addUserMessage(message) {
+
+    const messageRow =
+        document.createElement("div");
+
+    messageRow.className =
+        "chat-message user";
+
+
+    const messageBubble =
+        document.createElement("div");
+
+    messageBubble.className =
+        "user-message";
+
+
+    messageBubble.textContent =
+        message;
+
+
+    messageRow.appendChild(
+        messageBubble
+    );
+
+
+    chatArea.appendChild(
+        messageRow
+    );
+
+
+    scrollToBottom();
+
+}
+
+
+/* =========================================
+   ADD AI MESSAGE
+========================================= */
+
+function addAIMessage(message) {
+
+    const messageRow =
+        document.createElement("div");
+
+    messageRow.className =
+        "chat-message ai";
+
+
+    const aiMessage =
+        document.createElement("div");
+
+    aiMessage.className =
+        "ai-message";
+
+
+    /* =====================================
+       ALDEN IMAGE
+    ===================================== */
+
+    const imageContainer =
+        document.createElement("div");
+
+    imageContainer.className =
+        "message-ai-image";
+
+
+    const image =
+        document.createElement("img");
+
+
+    image.src =
+        "../assests/ai-bot.png";
+
+
+    image.alt =
+        "Alden";
+
+
+    imageContainer.appendChild(
+        image
+    );
+
+
+    /* =====================================
+       AI MESSAGE TEXT
+    ===================================== */
+
+    const messageContent =
+        document.createElement("div");
+
+    messageContent.className =
+        "ai-message-content";
+
+
+    messageContent.innerHTML =
+        formatAIResponse(message);
+
+
+    /* =====================================
+       BUILD MESSAGE
+    ===================================== */
+
+    aiMessage.appendChild(
+        imageContainer
+    );
+
+    aiMessage.appendChild(
+        messageContent
+    );
+
+    messageRow.appendChild(
+        aiMessage
+    );
+
+    chatArea.appendChild(
+        messageRow
+    );
+
+
+    scrollToBottom();
+
+}
+
+
+/* =========================================
+   TYPING INDICATOR
+========================================= */
+
+function showTypingIndicator() {
+
+    const messageRow =
+        document.createElement("div");
+
+    messageRow.className =
+        "chat-message ai";
+
+    messageRow.id =
+        "typingMessage";
+
+
+    const aiMessage =
+        document.createElement("div");
+
+    aiMessage.className =
+        "ai-message";
+
+
+    /* =====================================
+       IMAGE
+    ===================================== */
+
+    const imageContainer =
+        document.createElement("div");
+
+    imageContainer.className =
+        "message-ai-image";
+
+
+    const image =
+        document.createElement("img");
+
+    image.src =
+        "../assests/ai-bot.png";
+
+    image.alt =
+        "Alden";
+
+
+    imageContainer.appendChild(
+        image
+    );
+
+
+    /* =====================================
+       TYPING DOTS
+    ===================================== */
+
+    const typing =
+        document.createElement("div");
+
+    typing.className =
+        "typing-indicator";
+
+
+    for (let i = 0; i < 3; i++) {
+
+        const dot =
+            document.createElement("span");
+
+        typing.appendChild(dot);
 
     }
 
 
-    /* =====================================================
-       PUBLIC API
-    ===================================================== */
+    aiMessage.appendChild(
+        imageContainer
+    );
 
-    window.CareerCopilotAuth = {
+    aiMessage.appendChild(
+        typing
+    );
 
-        getCurrentUser:
-            getCurrentUser,
+    messageRow.appendChild(
+        aiMessage
+    );
 
-        isLoggedIn:
-            isLoggedIn,
-
-        logout:
-            logout,
-
-        requireLogin:
-            redirectToLogin
-
-    };
+    chatArea.appendChild(
+        messageRow
+    );
 
 
-    /* =====================================================
-       INITIALIZE
-    ===================================================== */
+    scrollToBottom();
 
-    document.addEventListener(
-        "DOMContentLoaded",
-        function () {
+}
 
-            protectPage();
 
-            updateNavbar();
+/* =========================================
+   REMOVE TYPING INDICATOR
+========================================= */
 
-            protectLinks();
+function removeTypingIndicator() {
 
-            handleLoginPage();
+    const typingMessage =
+        document.getElementById(
+            "typingMessage"
+        );
 
-            handleRegistrationPage();
+
+    if (typingMessage) {
+
+        typingMessage.remove();
+
+    }
+
+}
+
+
+/* =========================================
+   SCROLL TO BOTTOM
+========================================= */
+
+function scrollToBottom() {
+
+    setTimeout(() => {
+
+        chatArea.scrollTop =
+            chatArea.scrollHeight;
+
+    }, 50);
+
+}
+
+async function getGeminiResponse(userMessage) {
+
+    try {
+
+        console.log("Sending message to Gemini:", userMessage);
+
+        const response = await fetch(API_URL, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json",
+                "x-goog-api-key": API_KEY
+            },
+
+            body: JSON.stringify({
+
+                contents: [
+                    {
+                        role: "user",
+                        parts: [
+                            {
+                                text:
+                                    ALDEN_PROMPT +
+                                    "\n\nUSER QUESTION:\n" +
+                                    userMessage
+                            }
+                        ]
+                    }
+                ]
+
+            })
+
+        });
+
+        console.log("HTTP Status:", response.status);
+
+        const data = await response.json();
+
+        console.log("Gemini response:", data);
+
+        if (!response.ok) {
+
+            console.error("Gemini API Error:", data);
+
+            if (response.status === 401) {
+                return "Alden authentication failed. Please check the Gemini API key and its project restrictions.";
+            }
+
+            if (response.status === 403) {
+                return "Alden is not authorized to use this Gemini API project. Please check the API key permissions.";
+            }
+
+            if (response.status === 429) {
+                return "Alden has temporarily reached the Gemini API quota. Please try again later.";
+            }
+
+            return (
+                "Gemini API Error: " +
+                (data.error?.message || "Unknown error")
+            );
+        }
+
+        const text =
+            data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (!text) {
+
+            console.error(
+                "Unexpected Gemini response:",
+                data
+            );
+
+            return "Alden received an unexpected response from Gemini.";
+        }
+
+        return text;
+
+    } catch (error) {
+
+        console.error("FETCH ERROR:", error);
+
+        return "Connection error: " + error.message;
+    }
+}
+
+
+/* =========================================
+   SEND MESSAGE
+========================================= */
+
+async function sendMessage() {
+
+    const message =
+        chatInput.value.trim();
+
+
+    /* =====================================
+       EMPTY MESSAGE
+    ===================================== */
+
+    if (!message) {
+
+        return;
+
+    }
+
+
+    /* =====================================
+       PREVENT DOUBLE REQUEST
+    ===================================== */
+
+    if (isWaitingForAI) {
+
+        return;
+
+    }
+
+
+    /* =====================================
+       START CHAT
+    ===================================== */
+
+    startChat();
+
+
+    /* =====================================
+       SHOW USER MESSAGE
+    ===================================== */
+
+    addUserMessage(message);
+
+
+    /* =====================================
+       CLEAR INPUT
+    ===================================== */
+
+    chatInput.value = "";
+
+    chatInput.style.height = "auto";
+
+
+    /* =====================================
+       SHOW TYPING
+    ===================================== */
+
+    showTypingIndicator();
+
+
+    isWaitingForAI = true;
+
+    sendButton.disabled = true;
+
+
+    try {
+
+        const response =
+            await getGeminiResponse(message);
+
+        addAIMessage(response);
+
+
+        /* =================================
+           REMOVE TYPING
+        ================================= */
+
+        removeTypingIndicator();
+
+
+    } catch (error) {
+
+        console.error(
+            "Alden error:",
+            error
+        );
+
+
+        removeTypingIndicator();
+
+
+        addAIMessage(
+            "Sorry, something went wrong while connecting to Alden. Please try again."
+        );
+
+    }
+
+
+    isWaitingForAI = false;
+
+    sendButton.disabled = false;
+
+    chatInput.focus();
+
+}
+
+
+/* =========================================
+   SEND BUTTON
+========================================= */
+
+if (sendButton) {
+
+    sendButton.addEventListener(
+        "click",
+        sendMessage
+    );
+
+}
+
+
+/* =========================================
+   ENTER KEY
+========================================= */
+
+if (chatInput) {
+
+    chatInput.addEventListener(
+        "keydown",
+        function (event) {
+
+            /*
+               Enter = Send
+               Shift + Enter = New line
+            */
+
+            if (
+                event.key === "Enter" &&
+                !event.shiftKey
+            ) {
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
 
         }
     );
 
-})();
+}
+
+
+/* =========================================
+   AUTO RESIZE TEXTAREA
+========================================= */
+
+if (chatInput) {
+
+    chatInput.addEventListener(
+        "input",
+        function () {
+
+            this.style.height =
+                "auto";
+
+
+            this.style.height =
+                Math.min(
+                    this.scrollHeight,
+                    130
+                ) + "px";
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   PREDEFINED QUESTIONS
+========================================= */
+
+/*
+   IMPORTANT:
+
+   DO NOT CHANGE THESE.
+
+   Your existing five questions continue
+   working exactly as before.
+*/
+
+const questionButtons =
+    document.querySelectorAll(
+        ".question-button"
+    );
+
+
+questionButtons.forEach(
+    function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const question =
+                    this.getAttribute(
+                        "data-question"
+                    );
+
+
+                if (!question) {
+
+                    return;
+
+                }
+
+
+                /*
+                   Put question into input.
+                */
+
+                chatInput.value =
+                    question;
+
+
+                /*
+                   Automatically send it.
+                */
+
+                sendMessage();
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================
+   INITIAL STATE
+========================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        if (chatInput) {
+
+            chatInput.focus();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   HIDE QUESTIONS WHEN TYPING
+========================================= */
+
+if (chatInput) {
+
+    chatInput.addEventListener(
+        "input",
+        function () {
+
+            if (
+                this.value.trim().length > 0
+            ) {
+
+                suggestedQuestions.style.display =
+                    "none";
+
+            } else if (!chatStarted) {
+
+                suggestedQuestions.style.display =
+                    "block";
+
+            }
+
+        }
+    );
+
+}
+
+
+function formatAIResponse(text) {
+    if (!text) {
+        return "";
+    }
+
+    // Remove common Markdown formatting
+    text = text
+        .replace(/\*\*(.*?)\*\*/g, "$1")
+        .replace(/__(.*?)__/g, "$1")
+        .replace(/\*(.*?)\*/g, "$1")
+        .replace(/_(.*?)_/g, "$1")
+        .replace(/^#{1,6}\s*/gm, "");
+
+    // Normalize line endings
+    text = text.replace(/\r\n/g, "\n");
+
+    const lines = text.split("\n");
+
+    let html = "";
+    let paragraph = [];
+
+    function addParagraph() {
+        if (paragraph.length > 0) {
+            html += `<p>${paragraph.join(" ")}</p>`;
+            paragraph = [];
+        }
+    }
+
+    lines.forEach(function (line) {
+
+        const trimmed = line.trim();
+
+        // Empty line = new paragraph
+        if (!trimmed) {
+            addParagraph();
+            return;
+        }
+
+        // Bullet points
+        if (/^[•●▪◦*-]\s+/.test(trimmed)) {
+            addParagraph();
+
+            const bulletText =
+                trimmed.replace(/^[•●▪◦*-]\s+/, "");
+
+            html += `
+                <div class="ai-bullet">
+                    <span>•</span>
+                    <p>${bulletText}</p>
+                </div>
+            `;
+
+            return;
+        }
+
+        // Numbered items
+        if (/^\d+[\.)]\s+/.test(trimmed)) {
+            addParagraph();
+
+            const match =
+                trimmed.match(/^(\d+)[\.)]\s+(.*)$/);
+
+            html += `
+                <div class="ai-step">
+                    <div class="ai-step-number">
+                        ${match[1]}
+                    </div>
+
+                    <div class="ai-step-content">
+                        <p>${match[2]}</p>
+                    </div>
+                </div>
+            `;
+
+            return;
+        }
+
+        /*
+         * Detect section headings.
+         *
+         * Short lines such as:
+         * Recommended Direction
+         * Skills to Learn
+         * Practice
+         * Projects
+         * Next Steps
+         */
+        const isHeading =
+            trimmed.length <= 55 &&
+            !trimmed.endsWith(".") &&
+            !trimmed.endsWith(",") &&
+            !trimmed.endsWith("?") &&
+            !trimmed.endsWith("!") &&
+            !trimmed.startsWith("•");
+
+        if (isHeading) {
+            addParagraph();
+
+            html += `
+                <h3>${trimmed}</h3>
+            `;
+
+            return;
+        }
+
+        // Normal paragraph text
+        paragraph.push(trimmed);
+    });
+
+    // Add final paragraph
+    addParagraph();
+
+    return html;
+}
+
+
+function formatAIResponse(text) {
+    if (!text) return "";
+
+    // Remove markdown formatting
+    text = text
+        .replace(/\*\*(.*?)\*\*/g, "$1")
+        .replace(/__(.*?)__/g, "$1")
+        .replace(/\*(.*?)\*/g, "$1")
+        .replace(/_(.*?)_/g, "$1")
+        .replace(/^#{1,6}\s*/gm, "");
+
+    // Normalize bullet characters
+    text = text.replace(/^[\t ]*[-*]\s+/gm, "• ");
+
+    // Split response into lines
+    const lines = text.split(/\r?\n/);
+
+    let html = "";
+    let currentParagraph = [];
+
+    function addParagraph() {
+        if (currentParagraph.length > 0) {
+            html += `<p>${currentParagraph.join(" ")}</p>`;
+            currentParagraph = [];
+        }
+    }
+
+    lines.forEach(line => {
+        line = line.trim();
+
+        // Empty line = new paragraph
+        if (!line) {
+            addParagraph();
+            return;
+        }
+
+        // Numbered section
+        if (/^\d+[\.\)]\s+/.test(line)) {
+            addParagraph();
+
+            const match = line.match(/^(\d+)[\.\)]\s+(.*)$/);
+
+            html += `
+                <div class="ai-step">
+                    <div class="ai-step-number">${match[1]}</div>
+                    <div class="ai-step-content">
+                        <h4>${match[2]}</h4>
+                    </div>
+                </div>
+            `;
+
+            return;
+        }
+
+        // Bullet point
+        if (line.startsWith("•")) {
+            addParagraph();
+
+            html += `
+                <div class="ai-bullet">
+                    <span>•</span>
+                    <p>${line.substring(1).trim()}</p>
+                </div>
+            `;
+
+            return;
+        }
+
+        // Short heading
+        const isHeading =
+            line.length <= 55 &&
+            !line.endsWith(".") &&
+            !line.endsWith(",") &&
+            !line.endsWith("?") &&
+            !line.endsWith("!");
+
+        if (isHeading) {
+            addParagraph();
+
+            html += `<h3>${line}</h3>`;
+
+            return;
+        }
+
+        // Normal text
+        currentParagraph.push(line);
+    });
+
+    addParagraph();
+
+    return html;
+}
