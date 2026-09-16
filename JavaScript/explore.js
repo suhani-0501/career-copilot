@@ -305,10 +305,11 @@ function renderCareerCards(careersToRender) {
            ----------------------------- */
 
         const icon = document.createElement("div");
-
         icon.className = "career-card-icon";
 
-        icon.textContent = career.icon || "💼";
+        const iconName = careerIcons[career.id] || "briefcase";
+
+        icon.innerHTML = `<i class="fa-solid fa-${iconName}"></i>`;
 
 
         /* -----------------------------
