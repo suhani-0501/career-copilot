@@ -3,11 +3,155 @@
    ========================================================= */
 
 
+/* =========================================================
+   CAREER ICON MAP
+   Converts career IDs into Font Awesome icons
+   ========================================================= */
+
+const compareCareerIcon = {
+
+    /* ---------------- TECHNOLOGY ---------------- */
+
+    "web-development": "globe",
+    "software-development": "laptop-code",
+    "data-science": "chart-column",
+    "artificial-intelligence": "robot",
+    "cybersecurity": "shield-halved",
+    "cloud-computing": "cloud",
+    "devops-engineering": "gears",
+    "mobile-app-development": "mobile-screen-button",
+    "ui-ux-design": "palette",
+    "database-administration": "database",
+    "network-engineering": "network-wired",
+    "game-development": "gamepad",
+    "blockchain-development": "link",
+    "data-analytics": "chart-line",
+    "technical-writing": "file-lines",
+
+
+    /* ---------------- HEALTHCARE ---------------- */
+
+    "doctor": "user-doctor",
+    "dentistry": "tooth",
+    "pharmacy": "pills",
+    "nursing": "user-nurse",
+    "physiotherapy": "person-walking",
+    "medical-laboratory": "flask",
+    "radiology-technician": "x-ray",
+    "occupational-therapy": "brain",
+    "optometry": "eye",
+    "nutrition-dietetics": "apple-whole",
+    "public-health": "hospital",
+    "medical-coding": "file-medical",
+    "healthcare-management": "hospital-user",
+
+
+    /* ---------------- BUSINESS ---------------- */
+
+    "business-management": "briefcase",
+    "marketing": "bullhorn",
+    "finance": "money-bill-trend-up",
+    "accounting": "file-invoice-dollar",
+    "human-resources": "users",
+    "business-analytics": "chart-pie",
+    "entrepreneurship": "rocket",
+    "investment-banking": "building-columns",
+    "consulting": "puzzle-piece",
+    "sales": "handshake",
+    "supply-chain": "truck",
+    "product-management": "box",
+    "digital-marketing": "mobile-screen-button",
+    "project-management": "clipboard-list",
+    "economics": "chart-line",
+
+
+    /* ---------------- CREATIVE ---------------- */
+
+    "graphic-design": "palette",
+    "animation": "film",
+    "film-making": "video",
+    "photography": "camera",
+    "content-creation": "microphone",
+    "fashion-design": "shirt",
+    "interior-design": "house",
+    "ux-research": "magnifying-glass",
+    "motion-graphics": "wand-magic-sparkles",
+    "copywriting": "pen-nib",
+    "video-editing": "scissors",
+    "architecture": "building",
+    "illustration": "paintbrush",
+
+
+    /* ---------------- EDUCATION ---------------- */
+
+    "school-teacher": "chalkboard-user",
+    "college-professor": "graduation-cap",
+    "online-teacher": "laptop",
+    "special-education": "heart",
+    "educational-psychology": "brain",
+    "instructional-design": "book-open",
+    "curriculum-design": "book",
+    "education-administration": "school",
+    "academic-counselling": "compass",
+    "corporate-training": "person-chalkboard",
+    "edtech-specialist": "lightbulb",
+    "language-teaching": "language",
+    "school-counselor": "comments",
+    "adult-education": "book",
+
+
+    /* ---------------- SCIENCE ---------------- */
+
+    "physics": "atom",
+    "chemistry": "flask",
+    "biology": "dna",
+    "biotechnology": "dna",
+    "microbiology": "bacterium",
+    "environmental-science": "leaf",
+    "astronomy": "satellite",
+    "geology": "mountain",
+    "marine-science": "water",
+    "food-science": "apple-whole",
+    "forensic-science": "microscope",
+    "mathematics": "calculator",
+    "statistics": "chart-simple",
+    "zoology": "paw",
+    "botany": "seedling",
+    "agricultural-science": "wheat-awn",
+
+
+    /* ---------------- OTHERS ---------------- */
+
+    "law": "scale-balanced",
+    "civil-services": "landmark",
+    "journalism": "newspaper",
+    "social-work": "people-group",
+    "hospitality": "hotel",
+    "aviation": "plane",
+    "event-management": "calendar-days",
+    "travel-tourism": "globe",
+    "sports-management": "trophy",
+    "real-estate": "building",
+    "public-relations": "bullhorn",
+    "library-science": "book",
+    "insurance": "shield-halved",
+    "actuarial-science": "calculator",
+    "logistics": "boxes-stacked",
+    "fitness-training": "dumbbell"
+
+};
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* -----------------------------------------------------
+
+    /* =====================================================
        ELEMENTS
-    ----------------------------------------------------- */
+       ===================================================== */
 
     const fieldSelection =
         document.getElementById("fieldSelection");
@@ -46,9 +190,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("progressPercentage");
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        STATE
-    ----------------------------------------------------- */
+       ===================================================== */
 
     let selectedField = null;
 
@@ -59,9 +203,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let userAnswers = {};
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        FIELD SELECTION
-    ----------------------------------------------------- */
+       ===================================================== */
 
     fieldOptions.forEach(option => {
 
@@ -83,9 +227,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        START COMPARISON
-    ----------------------------------------------------- */
+       ===================================================== */
 
     startComparison.addEventListener("click", () => {
 
@@ -115,9 +259,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        RENDER QUESTION
-    ----------------------------------------------------- */
+       ===================================================== */
 
     function renderQuestion() {
 
@@ -132,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
         questionContainer.innerHTML = "";
 
 
-        /* Question heading */
+        /* Question number */
 
         const questionNumber =
             document.createElement("span");
@@ -144,12 +288,16 @@ document.addEventListener("DOMContentLoaded", () => {
             `Question ${currentQuestion + 1}`;
 
 
+        /* Question title */
+
         const questionTitle =
             document.createElement("h2");
 
         questionTitle.textContent =
             question.question;
 
+
+        /* Description */
 
         const questionDescription =
             document.createElement("p");
@@ -161,6 +309,8 @@ document.addEventListener("DOMContentLoaded", () => {
             question.description || "";
 
 
+        /* Options */
+
         const optionsContainer =
             document.createElement("div");
 
@@ -170,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         /* Create options */
 
-        question.options.forEach((option, index) => {
+        question.options.forEach(option => {
 
             const button =
                 document.createElement("button");
@@ -236,7 +386,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
 
-            /* Click */
+            /* Answer click */
 
             button.addEventListener("click", () => {
 
@@ -270,9 +420,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        HANDLE ANSWER
-    ----------------------------------------------------- */
+       ===================================================== */
 
     function handleAnswer(
         question,
@@ -285,7 +435,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (question.type === "skills") {
 
             if (!Array.isArray(userAnswers[question.id])) {
+
                 userAnswers[question.id] = [];
+
             }
 
 
@@ -311,6 +463,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             return;
+
         }
 
 
@@ -327,7 +480,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         allOptions.forEach(option => {
+
             option.classList.remove("selected");
+
         });
 
 
@@ -336,9 +491,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        VALIDATE ANSWER
-    ----------------------------------------------------- */
+       ===================================================== */
 
     function hasAnswered(question) {
 
@@ -361,14 +516,19 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        NEXT
-    ----------------------------------------------------- */
+       ===================================================== */
 
     nextBtn.addEventListener("click", () => {
 
         const question =
             questions[currentQuestion];
+
+
+        if (!question) {
+            return;
+        }
 
 
         if (!hasAnswered(question)) {
@@ -398,9 +558,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        PREVIOUS
-    ----------------------------------------------------- */
+       ===================================================== */
 
     previousBtn.addEventListener("click", () => {
 
@@ -421,9 +581,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        VALIDATION MESSAGE
-    ----------------------------------------------------- */
+       ===================================================== */
 
     function showValidationMessage() {
 
@@ -453,9 +613,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        PROGRESS
-    ----------------------------------------------------- */
+       ===================================================== */
 
     function updateProgress() {
 
@@ -466,7 +626,9 @@ document.addEventListener("DOMContentLoaded", () => {
             currentQuestion + 1;
 
         const percentage =
-            Math.round((current / total) * 100);
+            Math.round(
+                (current / total) * 100
+            );
 
 
         progressText.textContent =
@@ -514,9 +676,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        NAVIGATION STATE
-    ----------------------------------------------------- */
+       ===================================================== */
 
     function updateNavigation() {
 
@@ -546,7 +708,6 @@ document.addEventListener("DOMContentLoaded", () => {
        COMPARISON ENGINE
        ===================================================== */
 
-
     function calculateComparison() {
 
         const selectedCareers =
@@ -573,18 +734,23 @@ document.addEventListener("DOMContentLoaded", () => {
             selectedCareers.map(career => {
 
                 return {
+
                     career: career,
-                    score: calculateCareerScore(
-                        career,
-                        userProfile
-                    )
+
+                    score:
+                        calculateCareerScore(
+                            career,
+                            userProfile
+                        )
+
                 };
 
             });
 
 
         scoredCareers.sort(
-            (a, b) => b.score - a.score
+            (a, b) =>
+                b.score - a.score
         );
 
 
@@ -600,9 +766,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        BUILD USER PROFILE
-       ----------------------------------------------------- */
+       ===================================================== */
 
     function buildUserProfile() {
 
@@ -656,9 +822,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        CAREER SCORE
-       ----------------------------------------------------- */
+       ===================================================== */
 
     function calculateCareerScore(
         career,
@@ -667,7 +833,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const careerSkills =
             career.skills || [];
-
 
         const careerInterests =
             career.interests || [];
@@ -680,18 +845,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 normalize
             );
 
-
         const requiredSkills =
             careerSkills.map(
                 normalize
             );
 
-
         const userInterests =
             profile.interests.map(
                 normalize
             );
-
 
         const targetInterests =
             careerInterests.map(
@@ -699,9 +861,7 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-        /* -----------------------------------------------
-           SKILL SCORE
-        ----------------------------------------------- */
+        /* Skill score */
 
         let matchingSkills = 0;
 
@@ -728,16 +888,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (requiredSkills.length > 0) {
 
             skillScore =
-                (matchingSkills /
-                    requiredSkills.length) *
-                100;
+                (
+                    matchingSkills /
+                    requiredSkills.length
+                ) * 100;
 
         }
 
 
-        /* -----------------------------------------------
-           INTEREST SCORE
-        ----------------------------------------------- */
+        /* Interest score */
 
         let matchingInterests = 0;
 
@@ -761,16 +920,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (targetInterests.length > 0) {
 
             interestScore =
-                (matchingInterests /
-                    targetInterests.length) *
-                100;
+                (
+                    matchingInterests /
+                    targetInterests.length
+                ) * 100;
 
         }
 
 
-        /* -----------------------------------------------
-           LEVEL SCORE
-        ----------------------------------------------- */
+        /* Level score */
 
         let levelScore = 70;
 
@@ -816,9 +974,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /* -----------------------------------------------
-           FINAL SCORE
-        ----------------------------------------------- */
+        /* Final score */
 
         const finalScore =
             (skillScore * 0.50) +
@@ -831,9 +987,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        NORMALIZE
-       ----------------------------------------------------- */
+       ===================================================== */
 
     function normalize(value) {
 
@@ -844,9 +1000,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        LEVEL NUMBER
-       ----------------------------------------------------- */
+       ===================================================== */
 
     function getLevelNumber(level) {
 
@@ -854,27 +1010,21 @@ document.addEventListener("DOMContentLoaded", () => {
             normalize(level);
 
 
-        if (
-            normalized === "beginner"
-        ) {
+        if (normalized === "beginner") {
 
             return 1;
 
         }
 
 
-        if (
-            normalized === "intermediate"
-        ) {
+        if (normalized === "intermediate") {
 
             return 2;
 
         }
 
 
-        if (
-            normalized === "advanced"
-        ) {
+        if (normalized === "advanced") {
 
             return 3;
 
@@ -917,7 +1067,18 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
+        /*
+         * Font Awesome icon for best career
+         */
+
+        const bestCareerIcon =
+            compareCareerIcon[bestCareer.id] ||
+            "briefcase";
+
+
         comparisonResult.innerHTML = `
+
+            <!-- RESULT HEADER -->
 
             <div class="result-header">
 
@@ -937,13 +1098,18 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
 
+            <!-- BEST MATCH -->
+
             <div class="best-match-card">
 
                 <div class="best-match-info">
 
                     <div class="result-career-icon">
-                        ${bestCareer.icon || "🧭"}
+
+                        <i class="fa-solid fa-${bestCareerIcon}"></i>
+
                     </div>
+
 
                     <div>
 
@@ -986,7 +1152,12 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
 
+            <!-- SKILLS -->
+
             <div class="result-grid">
+
+
+                <!-- MATCHING SKILLS -->
 
                 <div class="result-detail-card">
 
@@ -1015,15 +1186,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         ${
                             matchingSkills.length
-                            ? matchingSkills.map(skill => `
-                                <span class="skill-tag matched">
-                                    ${skill}
-                                </span>
-                            `).join("")
+
+                            ? matchingSkills
+                                .map(skill => `
+
+                                    <span class="skill-tag matched">
+                                        ${skill}
+                                    </span>
+
+                                `)
+                                .join("")
+
                             : `
+
                                 <span class="empty-result">
                                     No direct skill matches yet.
                                 </span>
+
                             `
                         }
 
@@ -1031,6 +1210,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 </div>
 
+
+                <!-- MISSING SKILLS -->
 
                 <div class="result-detail-card">
 
@@ -1059,15 +1240,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         ${
                             missingSkills.length
-                            ? missingSkills.map(skill => `
-                                <span class="skill-tag missing">
-                                    ${skill}
-                                </span>
-                            `).join("")
+
+                            ? missingSkills
+                                .map(skill => `
+
+                                    <span class="skill-tag missing">
+                                        ${skill}
+                                    </span>
+
+                                `)
+                                .join("")
+
                             : `
+
                                 <span class="empty-result">
                                     You already have the main listed skills.
                                 </span>
+
                             `
                         }
 
@@ -1077,6 +1266,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             </div>
 
+
+            <!-- OTHER MATCHES -->
 
             <div class="other-matches">
 
@@ -1096,35 +1287,52 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="match-list">
 
                     ${
-                        matches.map((item, index) => `
+                        matches
+                            .map(item => {
 
-                            <div class="match-item">
+                                const icon =
+                                    compareCareerIcon[
+                                        item.career.id
+                                    ] ||
+                                    "briefcase";
 
-                                <div class="match-item-icon">
-                                    ${item.career.icon || "🧭"}
-                                </div>
 
-                                <div class="match-item-info">
+                                return `
 
-                                    <h3>
-                                        ${item.career.title}
-                                    </h3>
+                                    <div class="match-item">
 
-                                    <p>
-                                        ${item.career.description || ""}
-                                    </p>
+                                        <div class="match-item-icon">
 
-                                </div>
+                                            <i class="fa-solid fa-${icon}"></i>
 
-                                <div class="small-score">
+                                        </div>
 
-                                    ${item.score}%
 
-                                </div>
+                                        <div class="match-item-info">
 
-                            </div>
+                                            <h3>
+                                                ${item.career.title}
+                                            </h3>
 
-                        `).join("")
+                                            <p>
+                                                ${item.career.description || ""}
+                                            </p>
+
+                                        </div>
+
+
+                                        <div class="small-score">
+
+                                            ${item.score}%
+
+                                        </div>
+
+                                    </div>
+
+                                `;
+
+                            })
+                            .join("")
                     }
 
                 </div>
@@ -1132,11 +1340,16 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
 
+            <!-- ADVICE -->
+
             <div class="result-advice">
 
                 <span class="advice-icon">
-                    ✈
+
+                    <i class="fa-solid fa-plane"></i>
+
                 </span>
+
 
                 <div>
 
@@ -1155,14 +1368,21 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
 
+            <!-- ACTIONS -->
+
             <div class="result-actions">
 
-                <button href="../roadmaps.html"
+                <button
                     class="primary-button"
                     id="makeRoadmapBtn"
                 >
+
                     Make My Roadmap
-                    <span>→</span>
+
+                    <span>
+                        →
+                    </span>
+
                 </button>
 
 
@@ -1170,7 +1390,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     class="secondary-button"
                     id="compareAgainBtn"
                 >
+
                     Compare Again
+
                 </button>
 
             </div>
@@ -1178,12 +1400,16 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
 
+        /* Show results */
+
         dynamicQuestions.hidden = true;
 
         comparisonResult.hidden = false;
 
 
-        /* Roadmap */
+        /* =================================================
+           MAKE ROADMAP
+           ================================================= */
 
         const makeRoadmapBtn =
             document.getElementById(
@@ -1191,23 +1417,25 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-        makeRoadmapBtn.addEventListener(
-            "click",
-            () => {
+        if (makeRoadmapBtn) {
 
-                makeRoadmap(
-                    bestCareer.id
-                );
+            makeRoadmapBtn.addEventListener(
+                "click",
+                () => {
 
-            }
-        );
+                    makeRoadmap(
+                        bestCareer.id
+                    );
 
-        document.getElementById("makeRoadmapBtn").addEventListener("click", function () {
-            window.location.href = "roadmaps.html";
-        });
+                }
+            );
+
+        }
 
 
-        /* Compare again */
+        /* =================================================
+           COMPARE AGAIN
+           ================================================= */
 
         const compareAgainBtn =
             document.getElementById(
@@ -1215,10 +1443,14 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-        compareAgainBtn.addEventListener(
-            "click",
-            restartComparison
-        );
+        if (compareAgainBtn) {
+
+            compareAgainBtn.addEventListener(
+                "click",
+                restartComparison
+            );
+
+        }
 
 
         window.scrollTo({
@@ -1228,14 +1460,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    
 
-    
-
-
-    /* -----------------------------------------------------
+    /* =====================================================
        MATCHING SKILLS
-       ----------------------------------------------------- */
+       ===================================================== */
 
     function getMatchingSkills(
         career,
@@ -1262,9 +1490,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        MISSING SKILLS
-       ----------------------------------------------------- */
+       ===================================================== */
 
     function getMissingSkills(
         career,
@@ -1291,29 +1519,51 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        MAKE ROADMAP
-       ----------------------------------------------------- */
+       ===================================================== */
 
     function makeRoadmap(
         careerId
     ) {
 
+        const career =
+            careers.find(
+                career =>
+                    String(career.id) ===
+                    String(careerId)
+            );
+
+
+        if (!career) {
+
+            alert("Career not found.");
+
+            return;
+
+        }
+
+
+        /*
+         * Store complete career object
+         * so roadmap.html can use it.
+         */
+
         localStorage.setItem(
             "selectedCareer",
-            String(careerId)
+            JSON.stringify(career)
         );
 
 
         window.location.href =
-            `roadmap.html?career=${careerId}`;
+            `roadmap.html?career=${encodeURIComponent(careerId)}`;
 
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        RESTART
-       ----------------------------------------------------- */
+       ===================================================== */
 
     function restartComparison() {
 
@@ -1359,15 +1609,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* -----------------------------------------------------
+    /* =====================================================
        NO CAREER RESULT
-       ----------------------------------------------------- */
+       ===================================================== */
 
     function showNoCareerResult() {
 
         comparisonResult.innerHTML = `
 
             <div class="no-result">
+
+                <div class="result-career-icon">
+
+                    <i class="fa-solid fa-compass"></i>
+
+                </div>
 
                 <h2>
                     We couldn't find careers for this field yet.
@@ -1381,7 +1637,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     class="primary-button"
                     id="tryAgainBtn"
                 >
+
                     Compare Again
+
                 </button>
 
             </div>
@@ -1389,40 +1647,29 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
 
-        dynamicQuestions.hidden = true;
+        dynamicQuestions.hidden =
+            true;
 
-        comparisonResult.hidden = false;
+
+        comparisonResult.hidden =
+            false;
 
 
-        document
-            .getElementById("tryAgainBtn")
-            .addEventListener(
+        const tryAgainBtn =
+            document.getElementById(
+                "tryAgainBtn"
+            );
+
+
+        if (tryAgainBtn) {
+
+            tryAgainBtn.addEventListener(
                 "click",
                 restartComparison
             );
 
-    }
-
-});
-
-
-document.addEventListener("click", function (event) {
-
-    if (event.target.closest("#makeRoadmapBtn")) {
-
-        if (!matches || matches.length === 0) {
-            alert("No career result found.");
-            return;
         }
 
-        const selectedCareer = matches[0].career;
-
-        localStorage.setItem(
-            "selectedCareer",
-            JSON.stringify(selectedCareer)
-        );
-
-        window.location.href = "roadmap.html";
     }
 
 });
