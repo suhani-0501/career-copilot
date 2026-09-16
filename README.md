@@ -136,7 +136,7 @@ Note: If the AI Assistant uses an external API such as the Gemini API, API crede
 
 🚀 Getting Started
 1. Clone the repository
-git clone https://github.com/your-username/career-copiolit.git
+git clone https: https://github.com/suhani-0501/career-copilot
 2. Open the project
 cd career-copiolit
 3. Run the project
