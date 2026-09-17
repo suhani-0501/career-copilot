@@ -9,7 +9,7 @@
    GEMINI API SETTINGS
 ========================================= */
 
-const API_KEY = "AQ.Ab8RN6I5vC1PadDkqoAZZyhGg6yfWGE3ivmuQpoAWeUw2i-F2g";
+const API_KEY = "AQ.Ab8RN6L2zevw_9LTncMqJPJFFu-a9hkWbI5qpaiELNG4fw0Dew";
 
 const API_URL =
     "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent";
